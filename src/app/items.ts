@@ -7,4 +7,8 @@ export class items{
     sustainabilityRating!: number;
     cost!: string;
     category!: string;
+
+    constructor() {
+        
+    }
 }
