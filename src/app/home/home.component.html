@@ -1,0 +1,7 @@
+  
+<table>
+  <div class="card" *ngFor="let items of itemsList">
+    <img routerLink = "/items" routerLinkActive = "active" src={{items.startingPicture}}  height="174" width="332" />
+    <p routerLink = "/items" routerLinkActive = "active">{{ items.name }}</p> 
+  </div>
+</table>

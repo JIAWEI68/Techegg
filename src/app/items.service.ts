@@ -5,12 +5,22 @@ import { items } from './items';
   providedIn: 'root'
 })
 export class ItemsService {
-  private listOfItems : items[] = [
+  listOfItems : items[] = [
     {
       name : 'Acer Monitor KA2 Series',
       description : 'This monitor is clean, cheap and is able to have a very good HD screen as it has 165Hz of refresh rates.',
-      startingPicture: './assests/Acer_Monitors_KA2-Series.png',
-      descriptionPicture: './assests/Acer_Monitors_KA2-Series_Side-View.png',
+      startingPicture: './assets/AcerMonitor.jpg',
+      descriptionPicture: './assets/Acer_Monitors_KA2-Series_Side-View.png',
+      priceRating : 3,
+      sustainabilityRating : 4,
+      cost : "$168",
+      category : "Monitor"
+    },
+    {
+      name : 'Alienware 25 Gaming Monitor',
+      description : 'This monitor is clean, cheap and is able to have a very good HD screen as it has 165Hz of refresh rates.',
+      startingPicture: './assets/',
+      descriptionPicture: './assets/Acer_Monitors_KA2-Series_Side-View.png',
       priceRating : 3,
       sustainabilityRating : 4,
       cost : "$168",
@@ -20,7 +30,7 @@ export class ItemsService {
   ]
   constructor() { }
 
-  getItems() : items[] {
+  getItems() {
     return this.listOfItems;
   }
 }
