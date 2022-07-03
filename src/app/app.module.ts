@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ItemsService } from './items.service';
+import { ItemsComponent } from './items/items.component';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { ItemsService } from './items.service';
     ItemPageComponent,
     LoginComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    ItemsComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

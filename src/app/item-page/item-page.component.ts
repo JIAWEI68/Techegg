@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../items.service';
 
 @Component({
-  selector: 'app-item-page',
+  selector: 'item-page',
   templateUrl: './item-page.component.html',
   styleUrls: ['./item-page.component.css'],
 })

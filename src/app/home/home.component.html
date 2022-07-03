@@ -1,14 +1,36 @@
-<table>
-  <div class="card" *ngFor="let items of itemsList">
-    <img
-      routerLink="/items/{{ items.id }}"
-      routerLinkActive="active"
-      src="{{ items.startingPicture }}"
-      height="174"
-      width="332"
-    />
-    <p routerLink="/items/{{ items.id }}" routerLinkActive="active">
-      {{ items.name }}
-    </p>
-  </div>
-</table>
+<html>
+  <body>
+    <div
+      class="shoppingCart"
+      style="position: 0; right: 0; margin-right: 200px"
+    >
+      <img
+        src="assets\shoppingCartIcon.png"
+        height="20"
+        
+        width="20"
+        routerLink="/payment"
+      />
+    </div>
+    <div class="container">
+      <div
+        class="card"
+        *ngFor="let items of itemsList"
+        style="position: relative"
+      >
+        <div class="col">
+          <img
+            routerLink="/items"
+            routerLinkActive="active"
+            src="{{ items.startingPicture }}"
+            height="174"
+            width="332"
+          />
+          <p routerLink="/items" routerLinkActive="active">
+            {{ items.name }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
