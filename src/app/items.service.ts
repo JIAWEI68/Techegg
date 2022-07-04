@@ -12,7 +12,6 @@ export class ItemsService {
     return itemsList;
   }
   getItemId(id: number) {
-    return itemsList[id];
     return itemsList.find((items) => items.id == id);
   }
 }

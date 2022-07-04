@@ -11,6 +11,7 @@ import { ItemsService } from './items.service';
 import { ItemsComponent } from './items/items.component';
 import { PaymentComponent } from './payment/payment.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,7 @@ import { PaymentComponent } from './payment/payment.component';
     HomeComponent,
     RegisterComponent,
     ItemsComponent,
-    PaymentComponent,
+    PaymentComponent
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule],
   providers: [ItemsService],
