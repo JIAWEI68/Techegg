@@ -14,13 +14,14 @@ import { PaymentService } from '../payment.service';
 })
 export class ItemsComponent implements OnInit {
   items?: items;
-  newPayment ?: payment;
+  newPayment?: payment;
   id: number = 0;
+  name: string = '';
   private sub: any;
   constructor(
     private route: ActivatedRoute,
     private itemsService: ItemsService,
-    private paymentService : PaymentService
+    private paymentService: PaymentService
   ) {}
 
   ngOnInit(): void {
@@ -29,14 +30,8 @@ export class ItemsComponent implements OnInit {
       this.items = this.itemsService.getItemId(this.id);
     });
   }
-  addToCart(){
-    this.newPayment = new payment();
-    this.newPayment.id = this.id;
-    this.newPayment.name = items.name;
-    this.newPayment.cost = items.cost;
-    this.newPayment.startingPicture = items.startingPicture
-    this.paymentService.addPayments(this.newPayment);
+  addToCart(items : items) {
+    this.paymentService.addPayments(items);
     console.log(paymentsList);
   }
-
 }

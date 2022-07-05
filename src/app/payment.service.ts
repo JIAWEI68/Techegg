@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { items } from './items';
 import { paymentsList } from './mock-payment';
 import { payment } from './payment';
 
@@ -11,7 +12,7 @@ export class PaymentService {
   getPayments() : payment[]{
     return paymentsList;
   }
-  addPayments(items: payment): void{
+  addPayments(items: items): void{
     paymentsList.push(items);
   }
 }
