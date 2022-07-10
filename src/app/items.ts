@@ -6,7 +6,7 @@ export class items {
   descriptionPicture!: string;
   priceRating!: number; //number = int
   sustainabilityRating!: number;
-  cost!: string;
+  cost!: number;
   category!: string;
   static cost: string;
   static startingPicture: string;

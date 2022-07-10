@@ -2,9 +2,8 @@
     <div class="col-75">
       <div class="container">
         <form action="/action_page.php">
-  
           <div class="row">
-            <div class="col-50">
+            <div class="col-50"> 
               <h3>Billing Address</h3>
               <label for="fname"><i class="fa fa-user"></i> Full Name</label>
               <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
@@ -69,15 +68,20 @@
         <h4>Cart
           <span class="price" style="color:black">
             <i class="fa fa-shopping-cart"></i>
-            <b>4</b>
+            <b>{{paymentList.length}}</b>
           </span>
         </h4>
-        <p><a href="#">Product 1</a> <span class="price">$15</span></p>
-        <p><a href="#">Product 2</a> <span class="price">$5</span></p>
-        <p><a href="#">Product 3</a> <span class="price">$8</span></p>
-        <p><a href="#">Product 4</a> <span class="price">$2</span></p>
+        <div *ngFor="let payment of paymentList">
+          <!-- <img src="{{payment.startingPicture}}"> -->
+         <p>{{payment.name}} {{payment.cost | currency : 'SGD'}}</p>
+        </div>
         <hr>
-        <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+        <p>Total <span class="price" style="color:black"><b>$ {{finalSum}}</b></span></p>
       </div>
     </div>
   </div>
+  <div>
+    <input type="number" [(ngModel)] = "finalSum">
+    <div id = "myPaypalBtns"></div>
+  </div>
+ 

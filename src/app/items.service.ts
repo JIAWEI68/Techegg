@@ -14,4 +14,8 @@ export class ItemsService {
   getItemId(id: number) {
     return itemsList.find((items) => items.id == id);
   }
+  category: string = "";
+  getItemsFiltered(category : any){
+    return itemsList.find((items)=> items.category == category);
+  }
 }

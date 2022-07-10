@@ -2,7 +2,7 @@
   <body>
     <div
       class="shoppingCart"
-      style="position: 0; right: 0; margin-right: 200px"
+      style="position: 0; right: 0; margin-right: 0px"
     >
       <img
         src="assets\shoppingCartIcon.png"
@@ -11,13 +11,25 @@
         routerLink="/payment"
       />
     </div>
-    <div class="container">
+    <!-- <div class="sidenav">
+      <input type="checkbox" id="monitor" name="Monitor" >
+      <label>Monitor</label><br>
+      <input type="checkbox" id="monitor" name="Monitor" (onChange) = "filterItems('Iphone')" (value) = "filterItems('Iphone')">
+      <label>Monitor</label>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="pull-center searchBox">
+      <input class="form-control" [formControl] = "searchText" placeholder="Search...">
+    </div> -->
+    <div id = "searchBox"><input [(ngModel)]="searchText" placeholder="search text goes here"></div>
+    <div class="table">
       <div
         class="card"
-        *ngFor="let items of itemsList"
+        *ngFor="let items of itemsList | filter : searchText "
         style="position: relative"
-      >
-        <div class="col">
+      > 
+        <tr class="col">
           <img
             routerLink="/items"
             [routerLink]="['/items', items.id]"
@@ -30,7 +42,7 @@
           <p [routerLink]="['/items', items.id]" routerLinkActive="active">
             {{ items.name }}
           </p>
-        </div>
+        </tr>
       </div>
     </div>
   </body>

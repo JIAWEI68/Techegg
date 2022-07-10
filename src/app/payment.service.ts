@@ -15,4 +15,10 @@ export class PaymentService {
   addPayments(items: items): void{
     paymentsList.push(items);
   }
+  getTotalCost(sum:number){
+    console.log(sum)
+   paymentsList.forEach((a) => (sum += a.cost)); 
+    return sum;
+  }
+ 
 }

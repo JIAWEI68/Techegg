@@ -9,7 +9,7 @@ export const itemsList: items[] = [
     descriptionPicture: './assets/Acer_Monitors_KA2-Series_Side-View.png',
     priceRating: 3,
     sustainabilityRating: 4,
-    cost: '$168',
+    cost: 168,
     category: 'Monitor',
   },
   {
@@ -21,7 +21,8 @@ export const itemsList: items[] = [
     descriptionPicture: './assets/Acer_Monitors_KA2-Series_Side-View.png',
     priceRating: 3,
     sustainabilityRating: 4,
-    cost: '$168',
+    cost: 168,
     category: 'Monitor',
   },
 ];
+export const searchList : items[] = [];

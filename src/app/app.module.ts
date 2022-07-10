@@ -10,6 +10,9 @@ import { RegisterComponent } from './register/register.component';
 import { ItemsService } from './items.service';
 import { ItemsComponent } from './items/items.component';
 import { PaymentComponent } from './payment/payment.component';
+import { PaymentService } from './payment.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FilterPipe } from './home/filter.pipe';
 
 
 @NgModule({
@@ -19,10 +22,11 @@ import { PaymentComponent } from './payment/payment.component';
     HomeComponent,
     RegisterComponent,
     ItemsComponent,
-    PaymentComponent
+    PaymentComponent,
+    FilterPipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule],
-  providers: [ItemsService],
+  imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
+  providers: [ItemsService, PaymentService, FilterPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
