@@ -8,8 +8,7 @@ export class items {
   sustainabilityRating!: number;
   cost!: number;
   category!: string;
-  static cost: string;
-  static startingPicture: string;
+
 
 
   constructor() {}

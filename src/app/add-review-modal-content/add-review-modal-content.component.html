@@ -1,0 +1,36 @@
+<div style="text-align: center">
+  <h1>Add Reviews</h1>
+</div>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(items)">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <p>
+          <input
+            formControlName="username"
+            id="”username”"
+            placeholder="Your username"
+          />
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <p>
+          <input
+            formControlName="description"
+            id="”description”"
+            placeholder="Description"
+          />
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <p>
+          <button class="btn btn-primary" type="submit">Add Reviews</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</form>

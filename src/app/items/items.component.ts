@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { items } from '../items';
 import { ItemsService } from '../items.service';
 import { itemsList } from '../mock-items';
 import { paymentsList } from '../mock-payment';
 import { payment } from '../payment';
 import { PaymentService } from '../payment.service';
+import { ReviewsModalContainerComponent } from '../reviews-modal-container/reviews-modal-container.component';
+import { ReviewsModalContentComponent } from '../reviews-modal-content/reviews-modal-content.component';
 
 @Component({
   selector: 'app-items',
@@ -22,7 +25,8 @@ export class ItemsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private itemsService: ItemsService,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private modalService : NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -34,5 +38,10 @@ export class ItemsComponent implements OnInit {
   addToCart(items : items) {
     this.paymentService.addPayments(items);
     console.log(paymentsList);
+  }
+  openModal(){
+    const modalRef = this.modalService.open(ReviewsModalContentComponent);
+    modalRef.componentInstance.items = this.items;
+    console.log(this.items)
   }
 }

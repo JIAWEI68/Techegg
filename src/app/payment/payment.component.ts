@@ -35,14 +35,6 @@ export class PaymentComponent implements AfterViewChecked {
     }
   }
   constructor(private paymentService: PaymentService) {
-    render({
-      id : "#myPaypalBtns",
-      currency : "SGD",
-      value : this.finalSum.toString(),
-      onApprove: () => {
-        alert("Transaction Successful")
-      }
-    })
   }
   ngAfterViewChecked(): void {
     if(!this.addScript){

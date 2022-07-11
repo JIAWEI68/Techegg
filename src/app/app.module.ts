@@ -13,6 +13,12 @@ import { PaymentComponent } from './payment/payment.component';
 import { PaymentService } from './payment.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from './home/filter.pipe';
+import { ReviewsModalContainerComponent } from './reviews-modal-container/reviews-modal-container.component';
+import { ReviewsModalContentComponent } from './reviews-modal-content/reviews-modal-content.component';
+import { ReviewsService } from './reviews.service';
+import { AddReviewsModalComponent } from './add-reviews-modal-container/add-reviews-modal.component';
+import { AddReviewModalContentComponent } from './add-review-modal-content/add-review-modal-content.component';
+import { NameCheckerPipe } from './reviews-modal-content/name-checker.pipe';
 
 
 @NgModule({
@@ -24,9 +30,15 @@ import { FilterPipe } from './home/filter.pipe';
     ItemsComponent,
     PaymentComponent,
     FilterPipe,
+    ReviewsModalContainerComponent,
+    ReviewsModalContentComponent,
+    AddReviewsModalComponent,
+    AddReviewModalContentComponent,
+    NameCheckerPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
-  providers: [ItemsService, PaymentService, FilterPipe],
+  providers: [ItemsService, PaymentService, FilterPipe, ReviewsService],
   bootstrap: [AppComponent],
+  entryComponents : [ReviewsModalContainerComponent, AddReviewModalContentComponent]
 })
 export class AppModule {}
