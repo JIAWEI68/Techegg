@@ -4,8 +4,10 @@ import { AddReviewModalContentComponent } from '../add-review-modal-content/add-
 import { items } from '../items';
 import { reviews } from '../reviews';
 import { ReviewsService } from '../reviews.service';
+import { NameCheckerPipe } from './name-checker.pipe';
 
 @Component({
+  providers : [NameCheckerPipe],
   selector: 'app-reviews-modal-content',
   templateUrl: './reviews-modal-content.component.html',
   styleUrls: ['./reviews-modal-content.component.css'],
@@ -13,10 +15,11 @@ import { ReviewsService } from '../reviews.service';
 export class ReviewsModalContentComponent implements OnInit {
   items!: items;
   itemsName !: string 
-  constructor(private modalService: NgbModal, private reviewsService : ReviewsService) {}
+  constructor(private modalService: NgbModal, private reviewsService : ReviewsService, private nameCheckerPipe : NameCheckerPipe) {}
 
   ngOnInit(): void {
     console.log(items);
+    this.reviewsList = this.nameCheckerPipe.transform(this.reviewsList, this.itemsName);
   }
   openModal(itemsName : string) {
     const modalRef = this.modalService.open(AddReviewModalContentComponent);

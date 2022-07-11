@@ -37,7 +37,7 @@ import { NameCheckerPipe } from './reviews-modal-content/name-checker.pipe';
     NameCheckerPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
-  providers: [ItemsService, PaymentService, FilterPipe, ReviewsService],
+  providers: [ItemsService, PaymentService, FilterPipe, ReviewsService, NameCheckerPipe],
   bootstrap: [AppComponent],
   entryComponents : [ReviewsModalContainerComponent, AddReviewModalContentComponent]
 })
