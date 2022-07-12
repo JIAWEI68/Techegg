@@ -19,7 +19,11 @@ import { ReviewsService } from './reviews.service';
 import { AddReviewsModalComponent } from './add-reviews-modal-container/add-reviews-modal.component';
 import { AddReviewModalContentComponent } from './add-review-modal-content/add-review-modal-content.component';
 import { NameCheckerPipe } from './reviews-modal-content/name-checker.pipe';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -36,9 +40,29 @@ import { NameCheckerPipe } from './reviews-modal-content/name-checker.pipe';
     AddReviewModalContentComponent,
     NameCheckerPipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
-  providers: [ItemsService, PaymentService, FilterPipe, ReviewsService, NameCheckerPipe],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    BrowserAnimationsModule
+  ],
+  providers: [
+    ItemsService,
+    PaymentService,
+    FilterPipe,
+    ReviewsService,
+    NameCheckerPipe,
+  ],
   bootstrap: [AppComponent],
-  entryComponents : [ReviewsModalContainerComponent, AddReviewModalContentComponent]
+  entryComponents: [
+    ReviewsModalContainerComponent,
+    AddReviewModalContentComponent,
+  ],
 })
 export class AppModule {}

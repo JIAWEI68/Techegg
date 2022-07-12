@@ -5,6 +5,7 @@ import { items } from '../items';
 import { ItemsService } from '../items.service';
 import { itemsList } from '../mock-items';
 import { paymentsList } from '../mock-payment';
+import { reviewsList } from '../mock-reviews';
 import { payment } from '../payment';
 import { PaymentService } from '../payment.service';
 import { ReviewsModalContainerComponent } from '../reviews-modal-container/reviews-modal-container.component';
@@ -44,5 +45,6 @@ export class ItemsComponent implements OnInit {
     modalRef.componentInstance.items = this.items;
     modalRef.componentInstance.id = this.id;
     console.log(this.items)
+    console.log(reviewsList)
   }
 }

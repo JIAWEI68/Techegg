@@ -49,3 +49,27 @@
     display: flex;
     justify-content: space-between;
   }
+  mat-sidenav{
+    margin-right: 1010px;
+    width: 300px;
+    border-right: none;
+    background: #ffccbc;
+    color: white;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+    border: 2px solid black
+}
+
+.content{
+    height: calc(100wh - 98px);
+    margin: 16px;
+    margin-left: 32px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+mat-sidenav-container{
+    height: calc(100wh - 65px);
+}

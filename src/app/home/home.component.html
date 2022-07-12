@@ -1,11 +1,49 @@
 <html>
+  <body>
+    <div class="shoppingCart" style="position: 0; right: 0; margin-right: 0px">
+      <img
+        src="assets\shoppingCartIcon.png"
+        height="20"
+        width="20"
+        routerLink="/payment"
+      />
+    </div>
+    <mat-sidenav-container>
+      <mat-sidenav mode = "side" position = "start" opened
+        ><input type="checkbox" id="monitor" name="Monitor" />
+        <label>Monitor</label><br />
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <div id="searchBox" style="text-align: center;">
+          <input [(ngModel)]="searchText" placeholder="search text goes here" />
+        </div>
+        <div class="containter">
+          <div class="row">
+            <div
+              class="card"
+              *ngFor="let items of itemsList | filter: searchText"
+              style="position: relative"
+            >
+              <img
+                routerLink="/items"
+                [routerLink]="['/items', items.id]"
+                routerLinkActive="active"
+                src="{{ items.startingPicture }}"
+                height="174"
+                width="332"
+              />
+              <p routerLink="/items" routerLinkActive="active"></p>
+              <p [routerLink]="['/items', items.id]" routerLinkActive="active">
+                {{ items.name }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </mat-sidenav-content
+      >
+    </mat-sidenav-container>
 
-<body>
-  <div class="shoppingCart" style="position: 0; right: 0; margin-right: 0px">
-    <img src="assets\shoppingCartIcon.png" height="20" width="20" routerLink="/payment" />
-  </div>
-
-  <!-- <div class="sidenav">
+    <!-- <div class="sidenav">
     <input type="checkbox" id="monitor" name="Monitor">
     <label>Monitor</label><br>
     <input type="checkbox" id="monitor" name="Monitor">
@@ -13,22 +51,5 @@
     <a href="#">Clients</a>
     <a href="#">Contact</a>
   </div> -->
-  <div id="searchBox">
-    <input [(ngModel)]="searchText" placeholder="search text goes here" />
-  </div>
-  <div class="containter">
-    <div class="row">
-      <div class="card" *ngFor="let items of itemsList | filter: searchText" style="position: relative">
-        <img routerLink="/items" [routerLink]="['/items', items.id]" routerLinkActive="active"
-          src="{{ items.startingPicture }}" height="174" width="332" />
-        <p routerLink="/items" routerLinkActive="active"></p>
-        <p [routerLink]="['/items', items.id]" routerLinkActive="active">
-          {{ items.name }}
-        </p>
-      </div>
-    </div>
-  </div>
-
-</body>
-
+  </body>
 </html>

@@ -17,4 +17,7 @@ export class ReviewsService {
     reviewsList.push(review);
     return of(review)
   }
-}
+  editReviews(review : reviews) : Observable<reviews>{
+    reviewsList[reviewsList.findIndex(x => review.username)] = review;
+    return of(review)
+  }}

@@ -21,6 +21,7 @@ export class ReviewsModalContentComponent implements OnInit {
   newReviews !: reviews;
   itemsName !: string 
   private sub: any;
+  // username : string = this.newReviews.username;
   reviewsList = this.reviewsService.getReviews();
   constructor(private modalService: NgbModal, private reviewsService : ReviewsService, private nameCheckerPipe : NameCheckerPipe, private route: ActivatedRoute, private fb :FormBuilder) {}
 
@@ -52,6 +53,17 @@ export class ReviewsModalContentComponent implements OnInit {
     alert("added reviews")
     console.log(this.newReviews)
     console.log(this.reviewsList)
+  }
+  edit(content: any){
+    this.modalService.open(content)
+  }
+  onEdit(username : string){
+    this.newReviews = new reviews();
+    this.newReviews.username = username;
+    this.newReviews.description = this.myForm.value.description;
+    this.newReviews.itemsId = this.items.id;
+    this.reviewsService.editReviews(this.newReviews).subscribe((data) => {this.reviewsList.push(data)})
+
   }
   
 }
