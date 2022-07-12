@@ -9,8 +9,7 @@ import { reviews } from './reviews';
 export class ReviewsService {
 
   constructor() { }
-  getReviews(itemsName : string) : reviews[] {
-    reviewsList.find((reviews) => reviews.itemName = itemsName);
+  getReviews() : reviews[] {
     return reviewsList
   }
   addReviews(review : reviews): void{

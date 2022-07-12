@@ -7,10 +7,9 @@ import { items } from '../items';
 export class NameCheckerPipe implements PipeTransform {
   items !: items
 
-  transform(reviews: any[], itemName: string): any[] {
-    if (!itemName) return reviews;
+  transform(reviews: any[], itemId : number): any[] {
     return reviews.filter((reviews) => {
-      return reviews.itemName = this.items.name
+      return reviews.itemId = itemId
     })
     
   }

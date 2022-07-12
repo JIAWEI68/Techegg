@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddReviewModalContentComponent } from '../add-review-modal-content/add-review-modal-content.component';
 import { items } from '../items';
@@ -15,11 +16,17 @@ import { NameCheckerPipe } from './name-checker.pipe';
 export class ReviewsModalContentComponent implements OnInit {
   items!: items;
   itemsName !: string 
-  constructor(private modalService: NgbModal, private reviewsService : ReviewsService, private nameCheckerPipe : NameCheckerPipe) {}
+  private sub: any;
+  id : number = 0;
+  reviewsList = this.reviewsService.getReviews();
+  constructor(private modalService: NgbModal, private reviewsService : ReviewsService, private nameCheckerPipe : NameCheckerPipe, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     console.log(items);
-    this.reviewsList = this.nameCheckerPipe.transform(this.reviewsList, this.itemsName);
+    this.reviewsList = this.nameCheckerPipe.transform(this.reviewsList, this.id);
+    this.sub = this.route.params.subscribe((params) => {
+      this.id = +params['id'];
+    });
   }
   openModal(itemsName : string) {
     const modalRef = this.modalService.open(AddReviewModalContentComponent);
@@ -28,5 +35,5 @@ export class ReviewsModalContentComponent implements OnInit {
     this.itemsName = itemsName;
 
   }
-  reviewsList = this.reviewsService.getReviews(this.itemsName);
+  
 }
