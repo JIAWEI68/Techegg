@@ -42,6 +42,7 @@ export class ItemsComponent implements OnInit {
   openModal(){
     const modalRef = this.modalService.open(ReviewsModalContentComponent);
     modalRef.componentInstance.items = this.items;
+    modalRef.componentInstance.id = this.id;
     console.log(this.items)
   }
 }

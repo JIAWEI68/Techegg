@@ -21,22 +21,8 @@ export class AddReviewModalContentComponent implements OnInit {
   constructor(private fb :FormBuilder, private reviewsService : ReviewsService, private route: ActivatedRoute, private itemsService : ItemsService) {}
 
   ngOnInit(): void {
-    this.myForm = this.fb.group({
-      username : '',
-      description : '',
-      itemsName : this.items.name
-    })
+    
     
   }
-  onSubmit(items : items){
-    this.newReviews = new reviews();
-    this.newReviews.username = this.myForm.value.username;
-    this.newReviews.description = this.myForm.value.description;
-    this.newReviews.itemsId = this.items.id;
-    this.reviewsService.addReviews(this.newReviews);
-    this.myForm.reset;
-    alert("added reviews")
-    console.log(this.newReviews)
-    console.log(reviewsList)
-  }
+  
 }
