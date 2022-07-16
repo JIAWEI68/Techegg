@@ -24,6 +24,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { CategoryFilterPipe } from './home/category-filter.pipe';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AddReviewsModalComponent,
     AddReviewModalContentComponent,
     NameCheckerPipe,
+    CategoryFilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatGridListModule,
+    MatCheckboxModule,
   ],
   providers: [
     ItemsService,
@@ -58,6 +64,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FilterPipe,
     ReviewsService,
     NameCheckerPipe,
+    CategoryFilterPipe,
   ],
   bootstrap: [AppComponent],
   entryComponents: [

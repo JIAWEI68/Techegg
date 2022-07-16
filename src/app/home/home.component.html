@@ -1,55 +1,140 @@
-<html>
-  <body>
-    <div class="shoppingCart" style="position: 0; right: 0; margin-right: 0px">
-      <img
-        src="assets\shoppingCartIcon.png"
-        height="20"
-        width="20"
-        routerLink="/payment"
-      />
-    </div>
-    <mat-sidenav-container>
-      <mat-sidenav mode = "side" position = "start" opened
-        ><input type="checkbox" id="monitor" name="Monitor" />
-        <label>Monitor</label><br />
-      </mat-sidenav>
-      <mat-sidenav-content>
-        <div id="searchBox" style="text-align: center;">
-          <input [(ngModel)]="searchText" placeholder="search text goes here" />
-        </div>
-        <div class="containter">
-          <div class="row">
-            <div
-              class="card"
-              *ngFor="let items of itemsList | filter: searchText"
-              style="position: relative"
-            >
-              <img
-                routerLink="/items"
-                [routerLink]="['/items', items.id]"
-                routerLinkActive="active"
-                src="{{ items.startingPicture }}"
-                height="174"
-                width="332"
-              />
-              <p routerLink="/items" routerLinkActive="active"></p>
-              <p [routerLink]="['/items', items.id]" routerLinkActive="active">
-                {{ items.name }}
-              </p>
-            </div>
+<div class="container">
+  <div class="shoppingCart" style="position: 0; right: 0; margin-right: 0px">
+    <img
+      src="assets\shoppingCartIcon.png"
+      height="20"
+      width="20"
+      routerLink="/payment"
+    />
+  </div>
+</div>
+<div class="container-fluid" id="left">
+  <mat-drawer-container style="left: 0; margin-left: -1.3%" position="start">
+    <mat-drawer #drawer mode="side" position="start" closed
+      ><section class="Tech">
+        <h2>Tech</h2>
+        <mat-checkbox
+          class="monitor"
+          (change)="onCheck($event.checked, 'Monitor')"
+          value="Monitor"
+        >
+          Monitor</mat-checkbox
+        ><br />
+        <mat-checkbox
+          class="monitor"
+          (change)="onCheck($event.checked, 'Desktop')"
+        >
+          Desktop</mat-checkbox
+        ><br />
+        <mat-checkbox
+          class="monitor"
+          (change)="onCheck($event.checked, 'Laptop')"
+        >
+          Laptop</mat-checkbox
+        ><br />
+      </section>
+
+      <section class="TechA">
+        <h2>Tech Accessories</h2>
+        <mat-checkbox
+          class="monitor"
+          (change)="onCheck($event.checked, 'Monitor Arm')"
+        >
+          Monitor Arm</mat-checkbox
+        ><br />
+        <mat-checkbox
+          class="monitor"
+          (change)="onCheck($event.checked, 'Mouse')"
+        >
+          Mouse</mat-checkbox
+        ><br />
+        <mat-checkbox
+          class="monitor"
+          (change)="onCheck($event.checked, 'Headset')"
+        >
+          Headset</mat-checkbox
+        ><br />
+      </section>
+      <section class="Stationary">
+        <h2>Stationary</h2>
+        <mat-checkbox
+          class="monitor"
+          (change)="onCheck($event.checked, 'Pencils')"
+        >
+          Pencils</mat-checkbox
+        ><br />
+        <mat-checkbox
+          class="monitor"
+          (change)="onCheck($event.checked, 'Pens')"
+        >
+          Pens</mat-checkbox
+        ><br />
+        <mat-checkbox
+          class="monitor"
+          (change)="onCheck($event.checked, 'Erasers')"
+        >
+          Erasers</mat-checkbox
+        ><br />
+      </section>
+      <section class="Accessories">
+        <h1>Accessories</h1>
+        <mat-checkbox
+          class="monitor"
+          (change)="onCheck($event.checked, 'Pencil Case')"
+        >
+          Pencil Case</mat-checkbox
+        ><br />
+        <mat-checkbox
+          class="monitor"
+          (change)="onCheck($event.checked, 'Backpack')"
+        >
+          Backpack</mat-checkbox
+        ><br />
+      </section>
+    </mat-drawer>
+    <div class="sidenav-content" style="background-color: white">
+      <button
+        type="button"
+        mat-button
+        (click)="drawer.toggle()"
+        closed
+        style="background-color: white"
+      >
+        <img src="assets\list.png" height="20" width="20" />
+      </button>
+      <div id="searchBox" style="text-align: center; background-color: white">
+        <input [(ngModel)]="searchText" placeholder="search text goes here" />
+      </div>
+      <div
+        class="containter"
+        style="height: 1250px; width: 2100px; background-color: white"
+        id="itemsContainer"
+      >
+        <div class="row" style="left: 0">
+          <div
+            class="card"
+            *ngFor="
+              let items of itemsList
+                | filter: searchText
+                | categoryFilter: filterKeys
+            "
+            style="position: relative"
+          >
+            <img
+              routerLink="/items"
+              [routerLink]="['/items', items.id]"
+              routerLinkActive="active"
+              src="{{ items.startingPicture }}"
+              height="174"
+              width="332"
+            />
+            <p routerLink="/items" routerLinkActive="active"></p>
+            <p [routerLink]="['/items', items.id]" routerLinkActive="active">
+              {{ items.name }}
+            </p>
           </div>
         </div>
-      </mat-sidenav-content
-      >
-    </mat-sidenav-container>
-
-    <!-- <div class="sidenav">
-    <input type="checkbox" id="monitor" name="Monitor">
-    <label>Monitor</label><br>
-    <input type="checkbox" id="monitor" name="Monitor">
-    <label>Monitor</label>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
-  </div> -->
-  </body>
-</html>
+      </div>
+    </div>
+  </mat-drawer-container>
+</div>

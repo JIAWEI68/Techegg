@@ -17,7 +17,14 @@ export class ReviewsService {
     reviewsList.push(review);
     return of(review)
   }
-  editReviews(review : reviews) : Observable<reviews>{
-    reviewsList[reviewsList.findIndex(x => review.username)] = review;
+  editReviews(review : reviews, id : number) : Observable<reviews>{
+    reviewsList[reviewsList.findIndex(x => x.id == id)].description = review.description;
     return of(review)
-  }}
+  }
+  deleteReviews(id: number) : Observable<reviews>{
+    reviewsList.forEach((value, index)=>{
+      if(value.id==id) reviewsList.splice(0,1);
+    });
+    return of()
+  }
+}

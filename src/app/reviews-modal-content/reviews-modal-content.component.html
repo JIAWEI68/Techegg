@@ -1,66 +1,111 @@
-<button type="button" (click)="open(content)">Add Reviews</button>
+<div style="display: flexS">
+  <p class="text">Reviews</p>
+  <div id="addReviews">
+    <button type="button" (click)="open(content); (myForm.reset)">
+      Add Reviews
+    </button>
+  </div>
+</div>
 <div class="card" *ngFor="let reviews of reviewsList">
-    {{reviews.username}}<br>
-    {{reviews.description}}
+  <p (click)="edit(editcontent)">{{ reviews.username }}</p>
+  <img
+    src="assets\bin.png"
+    height="50"
+    width="50"
+    style="margin-left: 450px"
+    (click)="delete(newReviews.id)"
+  />
+  <p (click)="edit(editcontent)">{{ reviews.description }}</p>
 </div>
 
 <ng-template #content let-modal>
-    <div style="text-align: center">
-        <h1>Add Reviews</h1>
-    </div>
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit(items)">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <p>
-                        <input formControlName="username" id="”username”" placeholder="Your username" />
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <p>
-                        <input formControlName="description" id="”description”" placeholder="Description" />
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <p>
-                        <button class="btn btn-primary" type="submit">Add Reviews</button>
-                    </p>
-                </div>
-            </div>
+  <div style="text-align: center">
+    <h1>Add Reviews</h1>
+  </div>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit(items); (myForm.reset)">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <p>
+            <input
+              type="number"
+              formControlName="id"
+              id="”id”"
+              placeholder="Your id"
+            />
+          </p>
         </div>
-    </form>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <p>
+            <input
+              formControlName="username"
+              id="”username”"
+              placeholder="Your username"
+            />
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <p>
+            <input
+              formControlName="description"
+              id="”description”"
+              placeholder="Description"
+            />
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <p>
+            <button class="btn btn-primary" type="submit">Add Reviews</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </form>
 </ng-template>
-<!-- <ng-template #editcontent let-modal>
-    <div style="text-align: center">
-        <h1>Edit Reviews</h1>
-    </div>
-    <form [formGroup]="myForm" (ngSubmit)="onEdit(username)">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <p>
-                        <input formControlName="username" id="”username”" placeholder="Your username" />
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <p>
-                        <input formControlName="description" id="”description”" placeholder="Description" />
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <p>
-                        <button class="btn btn-primary" type="submit">Add Reviews</button>
-                    </p>
-                </div>
-            </div>
+<ng-template #editcontent let-modal>
+  <div style="text-align: center">
+    <h1>Edit Reviews</h1>
+  </div>
+  <form
+    [formGroup]="myForm"
+    (ngSubmit)="onEdit(newReviews.id, newReviews.username)"
+  >
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <p>
+            <input
+              formControlName="username"
+              id="”username”"
+              placeholder="Your username"
+            />
+          </p>
         </div>
-    </form>
-</ng-template> -->
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <p>
+            <input
+              formControlName="description"
+              id="”description”"
+              placeholder="Description"
+            />
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <p>
+            <button class="btn btn-primary" type="submit">Edit Reviews</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-template>

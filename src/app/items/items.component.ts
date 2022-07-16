@@ -21,6 +21,7 @@ export class ItemsComponent implements OnInit {
   newPayment?: payment;
   id: number = 0;
   
+  
   name: string = '';
   private sub: any;
   constructor(

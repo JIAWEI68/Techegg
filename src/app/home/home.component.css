@@ -27,7 +27,7 @@
   
   /* When you mouse over the navigation links, change their color */
   .sidenav a:hover {
-    color: #f1f1f1;
+    color: black;
   }
   
   /* Style page content */
@@ -53,23 +53,57 @@
     margin-right: 1010px;
     width: 300px;
     border-right: none;
-    background: #ffccbc;
-    color: white;
+    color: black;
     border-radius: 10px;
     padding: 16px;
-    text-align: center;
+    text-align: left;
     border: 2px solid black
 }
 
-.content{
+sidenav-content{
     height: calc(100wh - 98px);
     margin: 16px;
-    margin-left: 32px;
+    margin-left: 35px;
+    justify-content: space-around;
+    justify-content: space-between;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+    left: 0;
+    background-color: white;
 }
 
-mat-sidenav-container{
+mat-drawer-container{
     height: calc(100wh - 65px);
+    left: 0; 
+    margin-left: 0px;
+    justify-content: space-around;
+    justify-content: space-between;
+    justify-content: center;
 }
+.container-fluid{
+  width: fit-content;
+  display: flex;
+  justify-content: space-around;
+  justify-content: space-between;
+  justify-content: center;
+  position: 0; 
+  left: 0; 
+  margin-right: 1100px;
+  background-color: white;
+}
+mat-drawer{
+  justify-content: space-between;
+  width: 300px;
+  height: auto;
+  border-right: none;
+  border-radius: 10px;
+  left: 0;
+  padding: 16px;
+  text-align: left;
+  left: 0;
+  border-style: solid;
+  border-color: black;
+}
+
+#left{position:absolute; left:0; background-color: white;}
