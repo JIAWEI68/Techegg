@@ -107,26 +107,26 @@
       </div>
       <div
         class="containter"
-        style="height: 1250px; width: 2100px; background-color: white"
+        style="height: 1250px; width: 2100px; background-color: white; justify-content: space-around;"
         id="itemsContainer"
       >
-        <div class="row" style="left: 0">
+        <div class="row" style="left: 0;">
           <div
-            class="card"
+            class="card" 
             *ngFor="
               let items of itemsList
                 | filter: searchText
                 | categoryFilter: filterKeys
             "
-            style="position: relative"
+            style="position: relative; margin-top: 40px; border-color: black;"
           >
             <img
               routerLink="/items"
               [routerLink]="['/items', items.id]"
               routerLinkActive="active"
               src="{{ items.startingPicture }}"
-              height="174"
-              width="332"
+              height="300"
+              width="390"
             />
             <p routerLink="/items" routerLinkActive="active"></p>
             <p [routerLink]="['/items', items.id]" routerLinkActive="active">

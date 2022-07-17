@@ -1,20 +1,16 @@
 <div style="display: flexS">
   <p class="text">Reviews</p>
   <div id="addReviews">
-    <button type="button" (click)="open(content); (myForm.reset)">
+    <button type="button" mat-raised-button color = "primary" (click)="open(content)">
       Add Reviews
     </button>
   </div>
 </div>
 <div class="card" *ngFor="let reviews of reviewsList">
   <p (click)="edit(editcontent)">{{ reviews.username }}</p>
-  <img
-    src="assets\bin.png"
-    height="50"
-    width="50"
-    style="margin-left: 450px"
-    (click)="delete(newReviews.id)"
-  />
+  <button mat-fab color="primary" aria-label="Example icon button with a delete icon" style="margin-left: 400px" (click) = "delete(newReviews.id, reviews)">
+    <mat-icon>delete</mat-icon>
+  </button>
   <p (click)="edit(editcontent)">{{ reviews.description }}</p>
 </div>
 
@@ -22,7 +18,7 @@
   <div style="text-align: center">
     <h1>Add Reviews</h1>
   </div>
-  <form [formGroup]="myForm" (ngSubmit)="onSubmit(items); (myForm.reset)">
+  <form [formGroup]="myForm"  #formDirective = "ngForm" (ngSubmit)="onSubmit(items, formDirective)">
     <div class="container">
       <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
@@ -83,7 +79,7 @@
             <input
               formControlName="username"
               id="”username”"
-              placeholder="Your username"
+              [(ngModel)]="newReviews.username"
             />
           </p>
         </div>

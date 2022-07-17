@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <html>
   <body>
+    <div class="container" style="position:absolute; right: 0; margin-right: 0px">
+      <div class="shoppingCart" style="position: 0; right: 0; margin-right: 0px">
+        <img
+          src="assets\shoppingCartIcon.png"
+          height="20"
+          width="20"
+          routerLink="/payment"
+        />
+      </div>
+    </div>
     <div style="display: inline-block; vertical-align: top">
-      <img src="{{ items?.startingPicture }}" height="300" width="400" />
+      <img src="{{ items?.startingPicture }}" height="400" width="400" />
     </div>
     <div style="display: inline-block; padding-right: 0ch">
       <br />
@@ -25,15 +35,15 @@
         />
       </p>
       <p>{{ items?.cost | currency : 'SGD'}}</p>
-      <button type="button" (click) = "openModal()">Reviews</button>
+      <button mat-raised-button color = "primary" (click) = "openModal()">Reviews</button>
     </div>
     <div
       style="
         display: inline-block;
         vertical-align: top;
         width: 30ch;
-        height: 5cm;
-        padding: 5ch;
+        height: 10px;
+        padding: 10px;
       "
     >
       <b>Description</b>
@@ -42,10 +52,10 @@
       </p>
     </div>
     <div style="display: inline-block">
-      <img src="assets\Acer_Monitors_KA2-Series_Side-View.jpg" />
+      <img src="{{items?.descriptionPicture}}" height="400" width="500"/>
     </div>
     <div class="addtocartbtn">
-      <button type="button" (click)="addToCart(items!)">Add To Cart</button>
+      <button mat-raised-button color = "primary" (click)="addToCart(items!)">Add To Cart</button>
     </div>
     <script src="" async defer></script>
   </body>

@@ -13,6 +13,8 @@
             <div *ngFor="let payment of paymentList">
               <!-- <img src="{{payment.startingPicture}}"> -->
              <p>{{payment.name}} {{payment.cost | currency : 'SGD'}}</p>
+             <p><button mat-raised-button color = "primary" (click) = "delete(items)">Delete
+             </button></p>
             </div>
             <hr>
             <p>Total <span class="price" style="color:black"><b>$ {{finalSum}}</b></span></p>

@@ -22,7 +22,7 @@ export class ReviewsService {
     return of(review)
   }
   deleteReviews(id: number) : Observable<reviews>{
-    reviewsList.forEach((value, index)=>{
+    reviewsList.forEach((value)=>{
       if(value.id==id) reviewsList.splice(0,1);
     });
     return of()

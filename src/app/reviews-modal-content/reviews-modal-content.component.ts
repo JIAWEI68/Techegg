@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AfterViewChecked, Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddReviewModalContentComponent } from '../add-review-modal-content/add-review-modal-content.component';
@@ -15,9 +15,10 @@ import { NameCheckerPipe } from './name-checker.pipe';
   templateUrl: './reviews-modal-content.component.html',
   styleUrls: ['./reviews-modal-content.component.css'],
 })
-export class ReviewsModalContentComponent implements OnInit {
+export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
   items!: items;
   id: number = 0;
+  reviewId: number = 0;
   myForm!: FormGroup;
   newReviews!: reviews;
   itemsName!: string;
@@ -30,22 +31,24 @@ export class ReviewsModalContentComponent implements OnInit {
     private nameCheckerPipe: NameCheckerPipe,
     private route: ActivatedRoute,
     private fb: FormBuilder
-  ) {
-  }
-
+  ) {}
   ngOnInit(): void {
-    console.log(items);
-    console.log(this.id);
-    this.reviewsList = this.reviewsList.filter(
-      (reviews) => reviews.itemsId === this.id
-    );
+    this.newReviews = new reviews();
     this.myForm = this.fb.group({
       id: '',
       username: '',
       description: '',
       itemsName: this.items.name,
     });
+    this.reviewsList = this.reviewsList.filter(
+      (reviews) => reviews.itemsId === this.id
+    );
+    console.log(reviewsList);
+    console.log(items);
+    console.log(this.id);
   }
+
+  ngAfterViewChecked(): void {}
   open(content: any) {
     this.modalService.open(content);
     this.myForm.reset;
@@ -53,7 +56,7 @@ export class ReviewsModalContentComponent implements OnInit {
     // console.log(this.items);
     // this.itemsName = itemsName;
   }
-  onSubmit(items: items) {
+  onSubmit(items: items, formDirective: FormGroupDirective) {
     this.newReviews = new reviews();
     this.newReviews.id = this.myForm.value.id;
     this.newReviews.username = this.myForm.value.username;
@@ -62,30 +65,30 @@ export class ReviewsModalContentComponent implements OnInit {
     this.reviewsService.addReviews(this.newReviews).subscribe((data) => {
       this.reviewsList.push(data);
     });
+    formDirective.resetForm();
     this.myForm.reset;
     console.log(this.newReviews);
     console.log(this.reviewsList);
   }
   edit(content: any) {
-    console.log(this.newReviews.id);
+    // console.log(this.newReviews.id);
     this.modalService.open(content);
     this.myForm.reset;
+    console.log(this.newReviews.id);
   }
-  onEdit(id : number, username : string) {
-    this.newReviews = new reviews();
+  onEdit(id: number, username: string) {
+    this.newReviews = this.newReviews;
     this.newReviews.id = id;
     this.newReviews.username = username;
     this.newReviews.description = this.myForm.value.description;
     this.newReviews.itemsId = this.items.id;
-    this.reviewsService
-      .editReviews(this.newReviews, id)
-      .subscribe((data) => {
-        this.reviewsList.findIndex((x) => data);
-      });
+    this.reviewsService.editReviews(this.newReviews, id).subscribe((data) => {
+      {
+        reviewsList[this.reviewsList.indexOf(data)] = data;
+      }
+    });
   }
-  delete(id : number){
-    this.reviewsService.deleteReviews(id).subscribe((data) => {
-      console.log(data)
-    })
+  delete(id: number, review: reviews) {
+    this.reviewsService.deleteReviews(id);
   }
 }

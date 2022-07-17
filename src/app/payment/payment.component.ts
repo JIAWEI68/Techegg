@@ -3,6 +3,7 @@ import { items } from '../items';
 import { payment } from '../payment';
 import { PaymentService } from '../payment.service';
 import { render} from 'creditcardpayments/CreditCardPayments'
+import { paymentsList } from '../mock-payment';
 declare let paypal : any
 
 @Component({
@@ -12,6 +13,8 @@ declare let paypal : any
 })
 export class PaymentComponent implements AfterViewChecked {
   sum: number = 0;
+  count : number = 0;
+  items !: items;
   addScript : boolean = false;
   finalSum: number = this.paymentService.getTotalCost(this.sum);
   paypalConfig = {
@@ -52,8 +55,12 @@ export class PaymentComponent implements AfterViewChecked {
       document.body.appendChild(scriptTagElement);
     })
   }
-
+  
   ngOnInit(): void {
+    this.paymentList = this.paymentList
+  }
+  delete(items: items){
+    this.paymentService.delete(items);
   }
   paymentList = this.paymentService.getPayments();
  
