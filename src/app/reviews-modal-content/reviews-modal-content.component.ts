@@ -57,7 +57,6 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
     // this.itemsName = itemsName;
   }
   onSubmit(items: items, formDirective: FormGroupDirective) {
-    this.newReviews = new reviews();
     this.newReviews.id = this.myForm.value.id;
     this.newReviews.username = this.myForm.value.username;
     this.newReviews.description = this.myForm.value.description;
@@ -77,7 +76,6 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
     console.log(this.newReviews.id);
   }
   onEdit(id: number, username: string) {
-    this.newReviews = this.newReviews;
     this.newReviews.id = id;
     this.newReviews.username = username;
     this.newReviews.description = this.myForm.value.description;

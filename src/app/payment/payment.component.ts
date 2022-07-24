@@ -2,7 +2,6 @@ import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { items } from '../items';
 import { payment } from '../payment';
 import { PaymentService } from '../payment.service';
-import { render} from 'creditcardpayments/CreditCardPayments'
 import { paymentsList } from '../mock-payment';
 declare let paypal : any
 
