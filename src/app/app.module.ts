@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { CategoryFilterPipe } from './home/category-filter.pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     AddReviewModalContentComponent,
     NameCheckerPipe,
     CategoryFilterPipe,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserModule,
