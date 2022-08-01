@@ -89,6 +89,6 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
     });
   }
   delete(id: number, review: reviews) {
-    this.reviewsService.deleteReviews(id);
+    this.reviewsService.deleteReviews(id).subscribe(results => location.reload());
   }
   }

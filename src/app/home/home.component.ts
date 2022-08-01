@@ -28,8 +28,10 @@ export class HomeComponent implements OnInit {
     private filterPipe: FilterPipe,
     private categoryFilter: CategoryFilterPipe,
     private paymentService: PaymentService
-  ) {}
+  ) { }
   ngOnInit() {
+    // console.log(this.itemList)
+    // this.itemList = this.itemsService.getAllItems();
     this.itemsList = this.filterPipe.transform(
       this.itemsList,
       this.searchText
@@ -42,10 +44,10 @@ export class HomeComponent implements OnInit {
     console.log(filterKeys);
     if (checked == true) {
       this.filterKeys.push($value);
-      this.itemsList = this.itemsList.filter(a=>filterKeys.includes(a.category))
+      this.itemsList = this.itemsList.filter(a => filterKeys.includes(a.category))
       console.log(this.itemsList)
     }
-    else{
+    else {
       this.filterKeys.splice(this.filterKeys.indexOf($value), 1);
       this.itemsList = this.itemsService.getItems()
     }

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { items } from './items';
 import { itemsList } from './mock-items';
@@ -6,8 +7,10 @@ import { itemsList } from './mock-items';
   providedIn: 'root',
 })
 export class ItemsService {
-  constructor() {}
+  constructor() {
 
+  }
+ 
   getItems(): items[] {
     return itemsList;
   }
@@ -15,7 +18,7 @@ export class ItemsService {
     return itemsList.find((items) => items.id == id);
   }
   category: string = "";
-  getItemsFiltered(category : any){
-    return itemsList.find((items)=> items.category == category);
+  getItemsFiltered(category: any) {
+    return itemsList.find((items) => items.category == category);
   }
 }

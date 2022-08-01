@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, '../dist')));
 app.use('/api', api);
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
-res.sendFile(path.join(__dirname, '../dist/meanApp/index.html'));
+res.sendFile(path.join(__dirname, '../dist/Techegg/index.html'));
 });
 /**
 * Get port from environment and store in Express.
