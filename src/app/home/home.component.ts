@@ -19,6 +19,7 @@ import { filterKeys, resultArray } from '../mock-items';
 })
 export class HomeComponent implements OnInit {
   itemsList = this.itemsService.getItems();
+  itemsDBList: items[] = [];
   searchText: string = '';
   filterKeys = filterKeys;
   resultArray = resultArray;
@@ -28,14 +29,18 @@ export class HomeComponent implements OnInit {
     private filterPipe: FilterPipe,
     private categoryFilter: CategoryFilterPipe,
     private paymentService: PaymentService
-  ) { }
+  ) {}
   ngOnInit() {
+    this.itemsService.getItemsDB().subscribe((data) => {
+      this.itemsDBList = data;
+    });
+    console.log(this.itemsDBList);
     // console.log(this.itemList)
     // this.itemList = this.itemsService.getAllItems();
-    this.itemsList = this.filterPipe.transform(
+    (this.itemsList = this.filterPipe.transform(
       this.itemsList,
       this.searchText
-    ),
+    )),
       this.categoryFilter.transform(this.itemsList, filterKeys);
   }
   paymentList = this.paymentService.getPayments();
@@ -44,12 +49,13 @@ export class HomeComponent implements OnInit {
     console.log(filterKeys);
     if (checked == true) {
       this.filterKeys.push($value);
-      this.itemsList = this.itemsList.filter(a => filterKeys.includes(a.category))
-      console.log(this.itemsList)
-    }
-    else {
+      this.itemsList = this.itemsList.filter((a) =>
+        filterKeys.includes(a.category)
+      );
+      console.log(this.itemsList);
+    } else {
       this.filterKeys.splice(this.filterKeys.indexOf($value), 1);
-      this.itemsList = this.itemsService.getItems()
+      this.itemsList = this.itemsService.getItems();
     }
   }
 }

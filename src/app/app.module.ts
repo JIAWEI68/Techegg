@@ -28,6 +28,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { CategoryFilterPipe } from './home/category-filter.pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
     BrowserAnimationsModule,
     MatGridListModule,
     MatCheckboxModule,
+    HttpClientModule
   ],
   providers: [
     ItemsService,

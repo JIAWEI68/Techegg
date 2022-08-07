@@ -7,18 +7,23 @@ import { itemsList } from './mock-items';
   providedIn: 'root',
 })
 export class ItemsService {
-  constructor() {
+  constructor(private http: HttpClient) {}
+  url: string = 'http://localhost:3000/items';
 
-  }
- 
   getItems(): items[] {
     return itemsList;
   }
   getItemId(id: number) {
     return itemsList.find((items) => items.id == id);
   }
-  category: string = "";
+  category: string = '';
   getItemsFiltered(category: any) {
     return itemsList.find((items) => items.category == category);
+  }
+  getItemsDB() {
+    return this.http.get<items[]>(this.url);
+  }
+  addItem(item: items) {
+    return this.http.post<items>(this.url, item);
   }
 }
