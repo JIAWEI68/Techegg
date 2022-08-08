@@ -15,7 +15,7 @@ MongoClient.connect(
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err, database) => {
     if (err) return console.log(err);
-    db = database.db("miniprojectDB");
+    db = database.db("Techegg");
   }
 );
 //create new post
@@ -40,17 +40,13 @@ router.get("/posts", (req, res) => {
       res.status(500).send(error);
     });
 });
-router.get("/items", (req, res) => {
+router.get('/items', (req, res) => {
   // Get posts from the mock api
   // This should ideally be replaced with a service that connects to MongoDB
-  axios
-    .get(`${API}/items`)
-    .then((posts) => {
-      res.status(200).json(posts.data);
-    })
-    .catch((error) => {
-      res.status(500).send(error);
-    });
+  db.collection('items').find().toArray((err, result) => {
+    if (err) return console.log(err);
+    res.send(result);
+  });
 });
 
 module.exports = router;

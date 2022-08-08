@@ -17,11 +17,11 @@ export class ReviewsService {
     reviewsList.push(review);
     return of(review)
   }
-  editReviews(review : reviews, id : number) : Observable<reviews>{
+  editReviews(review : reviews, id : string) : Observable<reviews>{
     reviewsList[reviewsList.findIndex(x => x.id == id)].description = review.description;
     return of(review)
   }
-  deleteReviews(id: number) : Observable<reviews>{
+  deleteReviews(id: string) : Observable<reviews>{
     reviewsList.forEach((value)=>{
       if(value.id==id) reviewsList.splice(0,1);
     });

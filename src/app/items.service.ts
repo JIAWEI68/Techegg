@@ -8,7 +8,7 @@ import { itemsList } from './mock-items';
 })
 export class ItemsService {
   constructor(private http: HttpClient) {}
-  url: string = 'http://localhost:3000/items';
+  url: string = "http://localhost:3000/api/items";
 
   getItems(): items[] {
     return itemsList;
@@ -21,9 +21,12 @@ export class ItemsService {
     return itemsList.find((items) => items.category == category);
   }
   getItemsDB() {
-    return this.http.get<items[]>(this.url);
+    return this.http.get(this.url, {responseType: 'text'});
   }
   addItem(item: items) {
     return this.http.post<items>(this.url, item);
   }
+  getAllItems() {
+    return this.http.get<items[]>(this.url, {responseType: 'json'});
+   }
 }

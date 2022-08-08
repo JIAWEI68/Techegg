@@ -76,7 +76,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
     this.myForm.reset;
     console.log(this.newReviews.id);
   }
-  onEdit(id: number, username: string) {
+  onEdit(id: string, username: string) {
     this.newReviews =  new reviews();
     this.newReviews.id = id;
     this.newReviews.username = username;
@@ -88,7 +88,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
       }
     });
   }
-  delete(id: number, review: reviews) {
+  delete(id: string, review: reviews) {
     this.reviewsService.deleteReviews(id).subscribe(results => location.reload());
   }
   }

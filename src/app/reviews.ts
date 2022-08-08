@@ -1,5 +1,5 @@
 export class reviews {
-  id !: number;
+  id !: string;
   itemsId !: number;
     itemName !: string
     username!: string;

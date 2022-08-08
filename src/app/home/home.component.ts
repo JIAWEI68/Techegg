@@ -31,8 +31,9 @@ export class HomeComponent implements OnInit {
     private paymentService: PaymentService
   ) {}
   ngOnInit() {
-    this.itemsService.getItemsDB().subscribe((data) => {
+    this.itemsService.getAllItems().subscribe((data) => {
       this.itemsDBList = data;
+      console.log(this.itemsDBList) 
     });
     console.log(this.itemsDBList);
     // console.log(this.itemList)
@@ -49,13 +50,16 @@ export class HomeComponent implements OnInit {
     console.log(filterKeys);
     if (checked == true) {
       this.filterKeys.push($value);
-      this.itemsList = this.itemsList.filter((a) =>
+      this.itemsDBList = this.itemsDBList.filter((a) =>
         filterKeys.includes(a.category)
       );
-      console.log(this.itemsList);
+      console.log(this.itemsDBList);
     } else {
       this.filterKeys.splice(this.filterKeys.indexOf($value), 1);
-      this.itemsList = this.itemsService.getItems();
+      this.itemsService.getAllItems().subscribe((data) => {
+        this.itemsDBList = data;
+        console.log(this.itemsDBList) 
+      });
     }
   }
 }
