@@ -29,4 +29,7 @@ export class ItemsService {
   getAllItems() {
     return this.http.get<items[]>(this.url, {responseType: 'json'});
    }
+   getItemDBId(id: number) {
+    return this.http.get<any>(this.url + "/" + id);
+   }
 }

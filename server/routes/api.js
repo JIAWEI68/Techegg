@@ -1,3 +1,4 @@
+var id;
 const express = require("express");
 const router = express.Router();
 // declare axios for making http requests
@@ -49,4 +50,12 @@ router.get('/items', (req, res) => {
   });
 });
 
+router.get('/items/:id', (req, res) => {
+  // Get posts from the mock api
+  // This should ideally be replaced with a service that connects to MongoDB
+  db.collection('items').find({"id" : router.param.id}).toArray((err, result) => {
+    if (err) return console.log(err);
+    res.send(result);
+  });
+});
 module.exports = router;

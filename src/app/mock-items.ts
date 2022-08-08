@@ -1,6 +1,6 @@
 import { items } from './items';
 export const itemsList: items[] = [
-  {
+  { _id : "0",
     id: 0,
     name: 'Acer Monitor KA2 Series',
     description:
@@ -12,7 +12,8 @@ export const itemsList: items[] = [
     cost: 168,
     category: 'Monitor',
   },
-  {
+  { 
+    _id : "1",
     id: 1,
     name: 'Alienware 25 Gaming Monitor',
     description:
@@ -25,6 +26,7 @@ export const itemsList: items[] = [
     category: 'Monitor',
   },
   {
+    _id : "2",
     id: 2,
     name: 'Alienware x17 R2 Gaming Laptop',
     description:
@@ -37,6 +39,7 @@ export const itemsList: items[] = [
     category: 'Laptop',
   },
   {
+    _id : "3",
     id: 3,
     name: 'Logitech G Pro',
     description:
@@ -49,6 +52,7 @@ export const itemsList: items[] = [
     category: 'Mouse',
   },
   {
+    _id : "4",
     id: 4,
     name: 'HP Omen 40L Desktop',
     description:
@@ -61,6 +65,7 @@ export const itemsList: items[] = [
     category: 'Desktop',
   },
   {
+    _id : "5",
     id: 5,
     name: 'PRISM+ Arc 1',
     description:

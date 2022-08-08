@@ -34,7 +34,10 @@ export class ItemsComponent implements OnInit {
   ngOnInit(): void {
     this.sub = this.route.params.subscribe((params) => {
       this.id = +params['id'];
-      this.items = this.itemsService.getItemId(this.id);
+      this.itemsService.getAllItems().subscribe((items) =>{
+        this.items = items.find((item) => item.id === this.id);
+        console.log(this.items);
+      }); 
     });
   }
   addToCart(items : items) {
