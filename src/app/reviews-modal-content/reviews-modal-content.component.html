@@ -6,9 +6,9 @@
     </button>
   </div>
 </div>
-<div class="card" *ngFor="let reviews of reviewsList">
+<div class="card" *ngFor="let reviews of reviewsDBList">
   <p (click)="edit(editcontent)">{{ reviews.username }}</p>
-  <button mat-fab color="primary" aria-label="Example icon button with a delete icon" style="margin-left: 400px" (click) = "delete(newReviews.id, reviews)">
+  <button mat-fab color="primary" aria-label="Example icon button with a delete icon" style="margin-left: 400px" (click) = "delete(reviews._id)">
     <mat-icon>delete</mat-icon>
   </button>
   <p (click)="edit(editcontent)">{{ reviews.description }}</p>
@@ -20,7 +20,7 @@
   </div>
   <form [formGroup]="myForm"  #formDirective = "ngForm" (ngSubmit)="onSubmit(items, formDirective)">
     <div class="container">
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
           <p>
             <input
@@ -31,7 +31,7 @@
             />
           </p>
         </div>
-      </div>
+      </div> -->
       <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
           <p>
@@ -68,9 +68,10 @@
   <div style="text-align: center">
     <h1>Edit Reviews</h1>
   </div>
-  <form
+  <div *ngFor = "let reviews of reviewsDBList; let i=index">
+    <form
     [formGroup]="myForm"
-    (ngSubmit)="onEdit(newReviews.id, newReviews.username)"
+    (ngSubmit)="updateDB(reviews._id)"
   >
     <div class="container">
       <div class="row">
@@ -78,8 +79,9 @@
           <p>
             <input
               formControlName="username"
-              id="”username”"
-              [(ngModel)]="newReviews.username"
+              id= "reviews.username"
+              value= reviews.username
+              [(ngModel)] = reviews.username
             />
           </p>
         </div>
@@ -89,7 +91,7 @@
           <p>
             <input
               formControlName="description"
-              id="”description”"
+              id= "description"
               placeholder="Description"
             />
           </p>
@@ -104,4 +106,5 @@
       </div>
     </div>
   </form>
+  </div>
 </ng-template>

@@ -19,6 +19,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
   items!: items;
   id: number = 0;
   reviewId: number = 0;
+  reviewsDBList : reviews[] = [];
   myForm!: FormGroup;
   newReviews!: reviews;
   itemsName!: string;
@@ -33,18 +34,22 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
     private fb: FormBuilder
   ) {}
   ngOnInit(): void {
-    this.newReviews = new reviews();
+    this.reviewsService.getAllReviews().subscribe(data => {
+      this.reviewsDBList = data.filter(
+        (reviews) => reviews.itemsId == this.id
+      );
+      console.log(this.reviewsDBList)
+    })
     this.myForm = this.fb.group({
       id: '',
       username: '',
       description: '',
-      itemsName: this.items.name,
+      itemsId: this.id,
     });
     this.reviewsList = this.reviewsList.filter(
       (reviews) => reviews.itemsId === this.id
     );
     console.log(reviewsList);
-    console.log(items);
     console.log(this.id);
   }
 
@@ -52,18 +57,14 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
   open(content: any) {
     this.modalService.open(content);
     this.myForm.reset;
-    // modalRef.componentInstance.items = this.items;
-    // console.log(this.items);
-    // this.itemsName = itemsName;
   }
   onSubmit(items: items, formDirective: FormGroupDirective) {
     this.newReviews = new reviews();
-    this.newReviews.id = this.myForm.value.id;
     this.newReviews.username = this.myForm.value.username;
     this.newReviews.description = this.myForm.value.description;
     this.newReviews.itemsId = this.items.id;
-    this.reviewsService.addReviews(this.newReviews).subscribe((data) => {
-      this.reviewsList.push(data);
+    this.reviewsService.addReviewsDB(this.newReviews).subscribe((data) => {
+      this.reviewsDBList.push(data);
     });
     formDirective.resetForm();
     this.myForm.reset;
@@ -74,11 +75,10 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
     // console.log(this.newReviews.id);
     this.modalService.open(content);
     this.myForm.reset;
-    console.log(this.newReviews.id);
   }
   onEdit(id: string, username: string) {
     this.newReviews =  new reviews();
-    this.newReviews.id = id;
+    this.newReviews._id = id;
     this.newReviews.username = username;
     this.newReviews.description = this.myForm.value.description;
     this.newReviews.itemsId = this.items.id;
@@ -88,7 +88,16 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
       }
     });
   }
-  delete(id: string, review: reviews) {
-    this.reviewsService.deleteReviews(id).subscribe(results => location.reload());
+  delete(id: string) {
+    this.reviewsService.deleteReviewsDB(id).subscribe((data) => {
+       this.reviewsDBList.splice(this.reviewsDBList.indexOf(data), 1);
+    })
+  }
+  updateDB(_id:string){
+    var description = (document.getElementById('description') as HTMLInputElement).value;
+    this.reviewsService.updateReviewsDB(_id, description).subscribe((data) => {
+      this.reviewsDBList[this.reviewsList.indexOf(data)] = data;
+    }
+    )
   }
   }

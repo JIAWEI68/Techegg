@@ -1,4 +1,4 @@
-<div class="container-fluid" style="position: relative; right: 0; margin-right: 0px; z-index: 10000; margin-left: 1080px;">
+<div class="container" style="position:absolute; right: 0; margin-right: 0px; z-index: 10000; margin-left: 1080px;">
   <div class="shoppingCart" style="position: 0; right: 0; margin-right: 0px; margin-left: 1000px;">
     <img src="assets\shoppingCartIcon.png" height="20" width="20" routerLink="/payment" />
   </div>
@@ -46,7 +46,7 @@
       <button type="button" mat-button (click)="drawer.toggle()" closed style="background-color: white">
         <img src="assets\list.png" height="20" width="20" />
       </button>
-      <div class = "container-fluid" style="text-align: center; background-color: white">
+      <div class = "container" style= " position:absolute; right: 0; margin-right: 0px; z-index: 10000; margin-left: 1100px;">
         <input [(ngModel)]="searchText" placeholder="search text goes here" />
       </div>
       <div class="containter"

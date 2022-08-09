@@ -5,6 +5,7 @@ const http = require('http');
 const cors = require('cors');
 // Get our API routes
 const api = require('./routes/api');
+const bodyParser = require('body-parser');
 const app = express();
 //Prevent Cross-origin request to be blocked
 app.use(cors());
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../dist')));
 // Set our api routes
 app.use('/api', api);
+app.use(bodyParser.urlencoded({extended: true}))
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
 res.sendFile(path.join(__dirname, '../dist/Techegg/index.html'));
