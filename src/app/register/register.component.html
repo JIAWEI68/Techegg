@@ -7,17 +7,22 @@
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-              <form>
-
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example1cg">Username</label>
-                  <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+              <form [formGroup] = "register" novalidate (ngSubmit) = "onSubmit()">
+                  <p><input formControlName="username" id="username" placeholder="Your name"/></p>
+                  <p><input formControlName="password" id="password" placeholder="Your
+                  password" /></p>
+                  <p><input formControlName="role" id="role" placeholder="user/admin" /></p>
+                  <p><button class="btn btn-primary" type="submit" >Register</button></p>
+          
+                <!-- <div class="form-outline mb-4">
+                    <label class="form-label" for="username">Username</label>
+                  <input type="text" formControlName = "username" id="username" class="form-control form-control-lg" />
                   
                 </div>
 
                 <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example3cg">Password</label>
-                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
+                    <label class="form-label" for="username">Password</label>
+                  <input type="password" formControlName = "password" id="password" class="form-control form-control-lg" />
                   
                 </div>
 
@@ -35,26 +40,19 @@
                 <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example4cdg">Email</label>
                     <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
-                    
                   </div>    
                   <div class="mb-4 pb-2">
                     <p>Profession</p>
-                    <select class="select" style="width: 250px;">
-                      <option value="1"></option>
-                      <option value="2">Student</option>
-                      <option value="3">Teacher</option>
-                      <option value="4">Office Worker</option>
+                    <select class="select" style="width: 250px;" formControlName = "role" id="role">
+                      <option value="Student" *ngFor ="let roles of selectList" [ngValue] = "roles">{{roles}}</option>
                     </select>
-                  </div>
-            
-                <div class="d-flex justify-content-center">
-                  <button type="button"
-                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
-                </div>
-
+                  </div> -->
+                  <!-- <div class="d-flex justify-content-center">
+                    <button type="button"
+                      class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                  </div> -->
                 <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
                     class="fw-bold text-body"><u>Login here</u></a></p>
-
               </form>
 
             </div>

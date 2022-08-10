@@ -21,6 +21,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
   reviewId: number = 0;
   reviewsDBList : reviews[] = [];
   myForm!: FormGroup;
+  updateForm !: FormGroup;
   newReviews!: reviews;
   itemsName!: string;
   private sub: any;
@@ -41,6 +42,12 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
       console.log(this.reviewsDBList)
     })
     this.myForm = this.fb.group({
+      id: '',
+      username: '',
+      description: '',
+      itemsId: this.id,
+    });
+    this.updateForm = this.fb.group({
       id: '',
       username: '',
       description: '',
@@ -84,7 +91,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
     this.newReviews.itemsId = this.items.id;
     this.reviewsService.editReviews(this.newReviews, id).subscribe((data) => {
       {
-        reviewsList[this.reviewsList.indexOf(data)] = data;
+        reviewsList[this.reviewsList.indexOf(data)].description = data.description;
       }
     });
   }
@@ -93,8 +100,8 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
        this.reviewsDBList.splice(this.reviewsDBList.indexOf(data), 1);
     })
   }
-  updateDB(_id:string){
-    var description = (document.getElementById('description') as HTMLInputElement).value;
+ onUpdate(_id:string){
+    var description = (document.getElementById(_id + '_description') as HTMLInputElement).value;
     this.reviewsService.updateReviewsDB(_id, description).subscribe((data) => {
       this.reviewsDBList[this.reviewsList.indexOf(data)] = data;
     }

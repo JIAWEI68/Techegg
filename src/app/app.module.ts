@@ -29,6 +29,10 @@ import { CategoryFilterPipe } from './home/category-filter.pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { LogoutComponent } from './logout/logout.component';
+import { UserComponent } from './user/user.component';
+import { AdminComponent } from './admin/admin.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +50,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     NameCheckerPipe,
     CategoryFilterPipe,
     ProfilePageComponent,
+    LogoutComponent,
+    UserComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +76,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     ReviewsService,
     NameCheckerPipe,
     CategoryFilterPipe,
+    AuthService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

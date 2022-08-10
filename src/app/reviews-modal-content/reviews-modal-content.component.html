@@ -68,10 +68,10 @@
   <div style="text-align: center">
     <h1>Edit Reviews</h1>
   </div>
-  <div *ngFor = "let reviews of reviewsDBList; let i=index">
+  <div *ngFor = "let reviews of reviewsDBList">
     <form
-    [formGroup]="myForm"
-    (ngSubmit)="updateDB(reviews._id)"
+    [formGroup]="updateForm"
+    (ngSubmit) = "onUpdate(reviews._id)"
   >
     <div class="container">
       <div class="row">
@@ -79,9 +79,8 @@
           <p>
             <input
               formControlName="username"
-              id= "reviews.username"
-              value= reviews.username
-              [(ngModel)] = reviews.username
+              id= {{reviews.username}}
+              value="{{ reviews.username }}"
             />
           </p>
         </div>
@@ -91,8 +90,7 @@
           <p>
             <input
               formControlName="description"
-              id= "description"
-              placeholder="Description"
+              id = {{reviews._id}}_description
             />
           </p>
         </div>
