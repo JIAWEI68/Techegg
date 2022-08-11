@@ -34,6 +34,7 @@ import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { AuthService } from './auth.service';
 import {MatSelectModule} from '@angular/material/select'
+import { NgxPayPalModule } from 'ngx-paypal';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import {MatSelectModule} from '@angular/material/select'
     MatGridListModule,
     MatCheckboxModule,
     HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    NgxPayPalModule,
   ],
   providers: [
     ItemsService,

@@ -3,67 +3,111 @@ import { items } from '../items';
 import { payment } from '../payment';
 import { PaymentService } from '../payment.service';
 import { paymentsList } from '../mock-payment';
-declare let paypal : any
+import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
+declare let paypal: any;
 
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css'],
 })
-export class PaymentComponent implements AfterViewChecked {
+export class PaymentComponent implements AfterViewChecked, OnInit {
+  public paypalsConfig?: IPayPalConfig;
   sum: number = 0;
-  count : number = 0;
-  items !: items;
-  addScript : boolean = false;
+  count: number = 0;
+  items!: items;
+  addScript: boolean = false;
   finalSum: number = this.paymentService.getTotalCost(this.sum);
   paypalConfig = {
-    env : 'sandbox',
+    env: 'sandbox',
     client: {
-      sandbox : 'AbgJlZm4uYCq5qpCRxkoI1G0qvgP7qSVV_VG0D-UzwceREK0URbrMbelv3sCT99tLJ37sucMkuRATPQj',
-      production : 'EFvmkDj9I3raucrJ608C-lIarphpgYqgVRgV77Y3Wvie0pwEzptD10F8cdEAyoxZ0IU_7caqFSXVtrS3'
+      sandbox:
+        'AbgJlZm4uYCq5qpCRxkoI1G0qvgP7qSVV_VG0D-UzwceREK0URbrMbelv3sCT99tLJ37sucMkuRATPQj',
+      production:
+        'EFvmkDj9I3raucrJ608C-lIarphpgYqgVRgV77Y3Wvie0pwEzptD10F8cdEAyoxZ0IU_7caqFSXVtrS3',
     },
-    commit : true,
-    payment : (data: any, actions: { payment: { create: (arg0: { payment: { transactions: { amount: { total: number; currency: string; }; }[]; }; }) => any; }; }) => {
+    commit: true,
+    payment: (
+      data: any,
+      actions: {
+        payment: {
+          create: (arg0: {
+            payment: {
+              transactions: { amount: { total: number; currency: string } }[];
+            };
+          }) => any;
+        };
+      }
+    ) => {
       return actions.payment.create({
         payment: {
-          transactions: [
-            {amount : {total : this.finalSum, currency : 'SGD'}}
-          ]
-        }
-      })
+          transactions: [{ amount: { total: this.finalSum, currency: 'SGD' } }],
+        },
+      });
     },
-    onAuthorize: (data: any, actions: { payment: { execute: () => Promise<any>; }; }) => {
-      return actions.payment.execute().then(() => {})
-    }
-  }
-  constructor(private paymentService: PaymentService) {
-  }
+    onAuthorize: (
+      data: any,
+      actions: { payment: { execute: () => Promise<any> } }
+    ) => {
+      return actions.payment.execute().then(() => {});
+    },
+  };
+  constructor(private paymentService: PaymentService) {}
   ngAfterViewChecked(): void {
-    if(!this.addScript){
-      this.addPayPalScript().then(()=> {
-        paypal.Button.render(this.paypalConfig, '#myPaypalBtns')
-      })
+    if (!this.addScript) {
+      this.addPayPalScript().then(() => {
+        paypal.Button.render(this.paypalConfig, '#myPaypalBtns');
+      });
     }
   }
-  addPayPalScript(){
+  addPayPalScript() {
     this.addScript = true;
     return new Promise((resolve, reject) => {
       let scriptTagElement = document.createElement('script');
-      scriptTagElement.src = 'https://www.paypalobjects.com/api/checkout.js'
+      scriptTagElement.src = 'https://www.paypalobjects.com/api/checkout.js';
       scriptTagElement.onload = resolve;
       document.body.appendChild(scriptTagElement);
-    })
+    });
   }
-  
+
   ngOnInit(): void {
-    this.paymentList = this.paymentList
+    this.paymentList = this.paymentList;
   }
-  delete(items: items){
+  delete(items: items) {
     this.paymentService.delete(items);
   }
   paymentList = this.paymentService.getPayments();
- 
-  
+  private initiConfig(): void {
+    this.paypalsConfig = {
+      currency: 'SGD',
+      clientId: 'sb',
+      createOrderOnClient: (data) =>
+        <ICreateOrderRequest>{
+          intent: 'CAPTURE',
+          purchase_units: [
+            {
+              amount: {
+                currency_code: 'SGD',
+                value: this.finalSum.toFixed(2),
+                breakdown: {
+                  item_total: {
+                    currency_code: 'SGD',
+                    value: this.finalSum.toFixed(2),
+                  },
+                },
+              },
+              items: this.paymentList.map((item) => {
+                return {
+                  name: item.name,
+                  unit_amount: {
+                    currency_code: 'SGD',
+                    value: item.cost.toFixed(2),
+                  },
+                };
+              }),
+            },
+          ],
+        },
+    };
+  }
 }
-
- 
