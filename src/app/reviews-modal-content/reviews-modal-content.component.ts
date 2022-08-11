@@ -49,7 +49,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
     });
     this.updateForm = this.fb.group({
       id: '',
-      username: '',
+      username: this.newReviews.username,
       description: '',
       itemsId: this.id,
     });

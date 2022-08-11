@@ -1,17 +1,22 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark" >
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="" routerLinkActive="active">Techegg</a>
+    <a class="navbar-brand" routerLink="" routerLinkActive="active" (click) = "goToHomePage()">Techegg</a>
     <div class="navbar-header">
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="navbar-nav ml-auto" id="navbarContent">
-          <li class="nav-item" class="nav-item">
-            <a class="nav-link" routerLink="/login" routerLinkActive="active"
+          <li class="nav-item" class="nav-item" id="login">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active" id = "login"
               >Login</a
             >
           </li>
           <li class="nav-item" class="nav-item">
-            <a class="nav-link" routerLink="/signup" routerLinkActive="active"
+            <a class="nav-link" routerLink="/signup" routerLinkActive="active" id = "signup"
               >Sign Up</a
+            >
+          </li>
+          <li class="nav-item" class="nav-item" style="display: hide;">
+            <a class="nav-link"  routerLink="/logout" routerLinkActive="active" id = "logout"
+              >Logout</a
             >
           </li>
           <li class="nav-item" class="image">
@@ -30,3 +35,4 @@
     <router-outlet></router-outlet>
   </div>
 </div>
+

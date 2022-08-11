@@ -33,6 +33,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { AuthService } from './auth.service';
+import {MatSelectModule} from '@angular/material/select'
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { AuthService } from './auth.service';
     BrowserAnimationsModule,
     MatGridListModule,
     MatCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule
   ],
   providers: [
     ItemsService,

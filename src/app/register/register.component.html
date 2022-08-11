@@ -9,9 +9,16 @@
 
               <form [formGroup] = "register" novalidate (ngSubmit) = "onSubmit()">
                   <p><input formControlName="username" id="username" placeholder="Your name"/></p>
-                  <p><input formControlName="password" id="password" placeholder="Your
-                  password" /></p>
-                  <p><input formControlName="role" id="role" placeholder="user/admin" /></p>
+                  <p><input formControlName="password" id="password" placeholder="Your password" /></p>
+                  <!-- <p><input formControlName="role" id="role" placeholder="user/admin" /></p> -->
+                  <mat-form-field appearance="fill">
+                    <mat-label>Roles</mat-label>
+                    <mat-select formControlName = "role" id = "role">
+                      <mat-option  *ngFor = "let select of selectList" [value] = "select.value">
+                        {{select.value}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                   <p><button class="btn btn-primary" type="submit" >Register</button></p>
           
                 <!-- <div class="form-outline mb-4">
@@ -51,7 +58,7 @@
                     <button type="button"
                       class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                   </div> -->
-                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
+                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a routerLink="/login" routerLinkActive="active"
                     class="fw-bold text-body"><u>Login here</u></a></p>
               </form>
 

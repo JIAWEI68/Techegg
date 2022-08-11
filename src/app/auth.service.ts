@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +8,7 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   regUserUrl: string = 'http://localhost:3000/api/reguser';
   authuser: string = 'http://localhost:3000/api/authuser';
+  private loggedIn = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient) {}
   regUser(username: string, pw: string, role: string) {
     return this.http.post<any[]>(this.regUserUrl, {
@@ -24,6 +26,9 @@ export class AuthService {
   setSecureToken(secure_token: string) {
     sessionStorage.setItem('LoggedIn', secure_token);
   }
+  get isLoggedInCheck(){
+    return this.loggedIn.asObservable();
+  }
   getSecureToken() {
     return sessionStorage.getItem('LoggedIn');
   }
@@ -34,10 +39,13 @@ export class AuthService {
     return sessionStorage.getItem('UserRole');
   }
   logout() {
+    this.loggedIn.next(true);
     sessionStorage.removeItem('LoggedIn');
     sessionStorage.removeItem('UserRole');
+    return this.getSecureToken() === null;
   }
   isLoggedIn() {
+    this.loggedIn.next(true);
     return this.getSecureToken() !== null;
   }
   isAdmin() {
