@@ -99,6 +99,7 @@ export class PaymentComponent implements AfterViewChecked, OnInit {
               items: this.paymentList.map((item) => {
                 return {
                   name: item.name,
+                  quantity : this.paymentList.length.toFixed(2),
                   unit_amount: {
                     currency_code: 'SGD',
                     value: item.cost.toFixed(2),
