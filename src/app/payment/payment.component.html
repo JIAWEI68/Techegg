@@ -18,7 +18,7 @@
             </div>
             <hr>
             <p>Total <span class="price" style="color:black"><b>$ {{finalSum}}</b></span></p>
-            <div id = "myPaypalBtns" style="height: 10px;"></div>
+            <ngx-paypal [config] = "paypalsConfig"></ngx-paypal>
               <div class="row">
                 <div class="col-50">
                 </div>
