@@ -31,24 +31,21 @@ router.route("/reviews").post(function (req, res) {
   });
 });
 router.route("/payment").post(function (req, res) {
- db.collection("payment").insertOne(req.body,
-    (err, result) => {
-      if (err) return console.log(err);
-      console.log("added to list");
-      res.send(result);
-    }
-  );
+  db.collection("payment").insertOne(req.body, (err, result) => {
+    if (err) return console.log(err);
+    console.log("added to list");
+    res.send(result);
+  });
 });
 router.route("/payment").get(function (req, res) {
-  db.collection("payment").find().toArray(
-    (err, result) => {
+  db.collection("payment")
+    .find()
+    .toArray((err, result) => {
       if (err) return console.log(err);
       console.log("got list");
       res.send(result);
-    }
-  );
-}
-);
+    });
+});
 router.route("/payment/:_id").delete(function (req, res) {
   db.collection("payment").findOneAndDelete(
     { _id: ObjectId(req.params._id) },
@@ -148,5 +145,15 @@ router.route("/reguser").post(function (req, res) {
       }
     );
   });
+});
+router.get("/users", (req, res) => {
+  // Get posts from the mock api
+  // This should ideally be replaced with a service that connects to MongoDB
+  db.collection("users")
+    .find()
+    .toArray((err, result) => {
+      if (err) return console.log(err);
+      res.send(result);
+    });
 });
 module.exports = router;

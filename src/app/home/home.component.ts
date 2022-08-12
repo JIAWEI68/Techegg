@@ -38,8 +38,8 @@ export class HomeComponent implements OnInit {
     console.log(this.itemsDBList);
     // console.log(this.itemList)
     // this.itemList = this.itemsService.getAllItems();
-    (this.itemsList = this.filterPipe.transform(
-      this.itemsList,
+    (this.itemsDBList = this.filterPipe.transform(
+      this.itemsDBList,
       this.searchText
     )),
       this.categoryFilter.transform(this.itemsList, filterKeys);

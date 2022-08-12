@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Injectable({
@@ -8,6 +9,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 export class AuthService {
   regUserUrl: string = 'http://localhost:3000/api/reguser';
   authuser: string = 'http://localhost:3000/api/authuser';
+  userUrl : string = 'http://localhost:3000/api/users';
   private loggedIn = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient) {}
   regUser(username: string, pw: string, role: string) {
@@ -24,13 +26,13 @@ export class AuthService {
     });
   }
   setSecureToken(secure_token: string) {
-    sessionStorage.setItem('LoggedIn', secure_token);
+    sessionStorage.setItem('Username', secure_token);
   }
   get isLoggedInCheck(){
     return this.loggedIn.asObservable();
   }
   getSecureToken() {
-    return sessionStorage.getItem('LoggedIn');
+    return sessionStorage.getItem('Username');
   }
   setUserRole(role: string) {
     sessionStorage.setItem('UserRole', role);
@@ -40,7 +42,7 @@ export class AuthService {
   }
   logout() {
     this.loggedIn.next(true);
-    sessionStorage.removeItem('LoggedIn');
+    sessionStorage.removeItem('Username');
     sessionStorage.removeItem('UserRole');
     return this.getSecureToken() === null;
   }
@@ -53,5 +55,8 @@ export class AuthService {
   }
   isUser() {
     return this.getUserRole() == 'user' || this.getUserRole() == 'admin';
+  }
+  public getAllUsers(){
+    return this.http.get<any[]>(this.userUrl, {'responseType' : 'json'});
   }
 }

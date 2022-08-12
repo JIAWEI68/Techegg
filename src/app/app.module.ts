@@ -35,6 +35,8 @@ import { AdminComponent } from './admin/admin.component';
 import { AuthService } from './auth.service';
 import {MatSelectModule} from '@angular/material/select'
 import { NgxPayPalModule } from 'ngx-paypal';
+import { SearchPipe } from './user/search-pipe.pipe';
+import { CategoryPipe } from './user/category.pipe';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import { NgxPayPalModule } from 'ngx-paypal';
     LogoutComponent,
     UserComponent,
     AdminComponent,
+    SearchPipe,
+    CategoryPipe,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +84,9 @@ import { NgxPayPalModule } from 'ngx-paypal';
     ReviewsService,
     NameCheckerPipe,
     CategoryFilterPipe,
-    AuthService
+    AuthService,
+    SearchPipe,
+    CategoryPipe,
   ],
   bootstrap: [AppComponent],
   entryComponents: [
