@@ -7,6 +7,8 @@ const cors = require('cors');
 const api = require('./routes/api');
 const bodyParser = require('body-parser');
 const app = express();
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true }));
 //Prevent Cross-origin request to be blocked
 app.use(cors());
 // Parsers for POST data

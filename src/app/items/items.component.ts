@@ -20,10 +20,11 @@ export class ItemsComponent implements OnInit {
   items?: items;
   newPayment?: payment;
   id: number = 0;
-  
+  paymentList : items[] = [];
   
   name: string = '';
   private sub: any;
+  newItems!: items;
   constructor(
     private route: ActivatedRoute,
     private itemsService: ItemsService,
@@ -40,9 +41,11 @@ export class ItemsComponent implements OnInit {
       }); 
     });
   }
-  addToCart(items : items) {
-    this.paymentService.addPayments(items);
-    console.log(paymentsList);
+  addToCart() {
+    this.paymentService.addPaymentToDB(this.items!.id, this.items!.name, this.items!.description,this.items!.startingPicture,this.items!.descriptionPicture,this.items!.priceRating,this.items!.sustainabilityRating,this.items!.cost,this.items!.category).subscribe((data) => {
+      this.paymentList.push(data);
+    });
+    console.log(this.items);
   }
   openModal(){
     const modalRef = this.modalService.open(ReviewsModalContentComponent);

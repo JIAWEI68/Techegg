@@ -26,6 +26,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
   itemsName!: string;
   private sub: any;
   // username : string = this.newReviews.username;
+  // username : string = (document.getElementById('username') as HTMLInputElement).value;
   reviewsList = this.reviewsService.getReviews();
   constructor(
     private modalService: NgbModal,
@@ -49,7 +50,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
     });
     this.updateForm = this.fb.group({
       id: '',
-      username: this.newReviews.username,
+      username: '',
       description: '',
       itemsId: this.id,
     });

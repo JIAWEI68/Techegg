@@ -17,7 +17,7 @@ export class PaymentComponent implements OnInit {
   count: number = 0;
   items!: items;
   addScript: boolean = false;
-  paymentList: payment[] = this.paymentService.getPayments();
+  paymentListDB: items[] = [];
   finalSum: number = this.paymentService.getTotalCost(this.sum);
   paypalConfig = {
     env: 'sandbox',
@@ -72,7 +72,13 @@ export class PaymentComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-    this.paymentList = this.paymentService.getPayments();
+    this.paymentService.getAllPayment().subscribe((data) => {
+      this.paymentListDB = data;
+      console.log(this.paymentListDB);
+      this.paymentListDB.forEach((item) => {
+        this.finalSum += item.cost;
+      } );
+    } );
     this.initiConfig();
   }
   delete(items: items) {
@@ -97,7 +103,7 @@ export class PaymentComponent implements OnInit {
                   },
                 },
               },
-              items: this.paymentList.map((item) => {
+              items: this.paymentListDB.map((item) => {
                 return {
                   name: "items",
                   quantity : '1',
@@ -142,5 +148,14 @@ export class PaymentComponent implements OnInit {
   resetStatus() {
     paymentsList.splice(0, paymentsList.length);
     this.finalSum = 0 ;
+  }
+  deleteItem(id: string){
+    this.paymentService.deletePaymentFromDB(id).subscribe((data) => {
+      this.paymentListDB.splice(this.paymentListDB.indexOf(data), 1);
+      this.paymentListDB.forEach((item) => {
+        this.finalSum -= item.cost;
+      } );
+      location.reload();
+    });
   }
 }

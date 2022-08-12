@@ -13,6 +13,7 @@ const ObjectId = require("mongodb").ObjectId;
 const bycrpt = require("bcryptjs");
 const BYCRYPT_SALT_ROUNDS = 12;
 var db;
+
 MongoClient.connect(
   "mongodb+srv://test1:test1@techegg.qvwefhn.mongodb.net/Techegg?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true },
@@ -29,7 +30,33 @@ router.route("/reviews").post(function (req, res) {
     res.send(results);
   });
 });
-
+router.route("/payment").post(function (req, res) {
+ db.collection("payment").insertOne(req.body,
+    (err, result) => {
+      if (err) return console.log(err);
+      console.log("added to list");
+      res.send(result);
+    }
+  );
+});
+router.route("/payment").get(function (req, res) {
+  db.collection("payment").find().toArray(
+    (err, result) => {
+      if (err) return console.log(err);
+      console.log("got list");
+      res.send(result);
+    }
+  );
+}
+);
+router.route("/payment/:_id").delete(function (req, res) {
+  db.collection("payment").findOneAndDelete(
+    { _id: ObjectId(req.params._id) },
+    (err, results) => {
+      res.send(results);
+    }
+  );
+});
 // Get all posts
 router.get("/reviews", (req, res) => {
   // Get posts from the mock api
@@ -113,7 +140,7 @@ router.route("/reguser").post(function (req, res) {
   var role = req.body.role;
   bycrpt.hash(password, BYCRYPT_SALT_ROUNDS, function (err, hash) {
     db.collection("users").insertOne(
-      { "username": username, "password": hash, "role": role },
+      { username: username, password: hash, role: role },
       (err, result) => {
         if (err) return console.log(err);
         console.log("user registered");

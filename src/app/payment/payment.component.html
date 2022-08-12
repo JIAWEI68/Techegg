@@ -7,13 +7,13 @@
               <h3>Cart
               <span class="price" style="color:black">
                 <i class="fa fa-shopping-cart"></i>
-                <b>{{paymentList.length}}</b>
+                <b>{{paymentListDB.length}}</b>
               </span>
             </h3>
-            <div *ngFor="let payment of paymentList">
+            <div *ngFor="let payment of paymentListDB">
               <!-- <img src="{{payment.startingPicture}}"> -->
              <p>{{payment.name}} {{payment.cost | currency : 'SGD'}}</p>
-             <p><button mat-raised-button color = "primary" (click) = "delete(items)">Delete
+             <p><button mat-raised-button color = "primary" (click) = "deleteItem(payment._id)">Delete
              </button></p>
             </div>
             <hr>

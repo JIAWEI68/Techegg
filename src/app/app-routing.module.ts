@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfilePageComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'user', component: UserComponent, canActivate: [AuthGuard], data:
-  {permission: {only: ["user", "admin"]}}},
+  {permission: {only: ["Student", "Teacher", "Office Worker", "admin"]}}},
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data:
   {permission: {only: ["admin"]}}},
   { path: '', component: HomeComponent, pathMatch: 'full' },

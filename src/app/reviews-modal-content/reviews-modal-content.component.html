@@ -70,7 +70,7 @@
   </div>
   <div *ngFor = "let reviews of reviewsDBList">
     <form
-    [formGroup]="updateForm"
+    [formGroup]="myForm"
     (ngSubmit) = "onUpdate(reviews._id)"
   >
     <div class="container">

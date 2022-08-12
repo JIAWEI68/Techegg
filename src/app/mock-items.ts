@@ -1,6 +1,6 @@
 import { items } from './items';
 export const itemsList: items[] = [
-  { _id : "0",
+  { _id: "0",
     id: 0,
     name: 'Acer Monitor KA2 Series',
     description:
@@ -12,8 +12,7 @@ export const itemsList: items[] = [
     cost: 168,
     category: 'Monitor',
   },
-  { 
-    _id : "1",
+  { _id: "1",
     id: 1,
     name: 'Alienware 25 Gaming Monitor',
     description:
@@ -26,20 +25,22 @@ export const itemsList: items[] = [
     category: 'Monitor',
   },
   {
-    _id : "2",
+    _id: "2",
     id: 2,
     name: 'Alienware x17 R2 Gaming Laptop',
     description:
       'This laptop experience high-performance action across your favorite games and applications with up to 14-core 12th Gen Intel® Core™ processors. Plus, push performance to its limit with post-purchase user-upgradeable memory SO-DIMMs, up to 64GB of DDR5 memory* and NVIDIA® GeForce RTX™ graphics that feature NVIDIA Dynamic Learning Super Sampling (DLSS) technology, Ray Tracing, and NVIDIA Max-Q technologies..',
-    startingPicture: './assets/laptop-alienware-x17-r2-nonlit-touchpad-gallery-3.png',
-    descriptionPicture: './assets/laptop-alienware-x17-r2-nonlit-touchpad-gallery-1.png',
+    startingPicture:
+      './assets/laptop-alienware-x17-r2-nonlit-touchpad-gallery-3.png',
+    descriptionPicture:
+      './assets/laptop-alienware-x17-r2-nonlit-touchpad-gallery-1.png',
     priceRating: 3,
     sustainabilityRating: 4,
     cost: 168,
     category: 'Laptop',
   },
   {
-    _id : "3",
+    _id: "3",
     id: 3,
     name: 'Logitech G Pro',
     description:
@@ -52,7 +53,7 @@ export const itemsList: items[] = [
     category: 'Mouse',
   },
   {
-    _id : "4",
+    _id: "4",
     id: 4,
     name: 'HP Omen 40L Desktop',
     description:
@@ -65,7 +66,7 @@ export const itemsList: items[] = [
     category: 'Desktop',
   },
   {
-    _id : "5",
+    _id: "5",
     id: 5,
     name: 'PRISM+ Arc 1',
     description:
@@ -78,6 +79,6 @@ export const itemsList: items[] = [
     category: 'Monitor Arm',
   },
 ];
-export const filterKeys : string[] = [];
+export const filterKeys: string[] = [];
 
-export const resultArray : any[] = [];
+export const resultArray: any[] = [];
