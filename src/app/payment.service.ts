@@ -56,4 +56,8 @@ export class PaymentService {
   deletePaymentFromDB(_id: string) {
     return this.http.delete<items>(this.url + '/' + _id);
   }
+  deleteAllPaymentFromDB() {
+    return this.http.delete<items>(this.url + '/' + "delete");
+  }
+
 }

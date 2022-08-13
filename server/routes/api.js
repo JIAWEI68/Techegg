@@ -37,6 +37,9 @@ router.route("/payment").post(function (req, res) {
     res.send(result);
   });
 });
+router.route("/payment/delete").delete(function (req, res) {
+  db.collection("payment").remove({});
+});
 router.route("/payment").get(function (req, res) {
   db.collection("payment")
     .find()
@@ -56,8 +59,6 @@ router.route("/payment/:_id").delete(function (req, res) {
 });
 // Get all posts
 router.get("/reviews", (req, res) => {
-  // Get posts from the mock api
-  // This should ideally be replaced with a service that connects to MongoDB
   db.collection("reviews")
     .find()
     .toArray((err, result) => {
@@ -133,11 +134,21 @@ router.route("/authuser").post(function (req, res2) {
 
 router.route("/reguser").post(function (req, res) {
   var username = req.body.username;
+  var firstName = req.body.firstName;
+  var lastName = req.body.lastName;
+  var email = req.body.email;
   var password = req.body.password;
   var role = req.body.role;
   bycrpt.hash(password, BYCRYPT_SALT_ROUNDS, function (err, hash) {
     db.collection("users").insertOne(
-      { username: username, password: hash, role: role },
+      {
+        username: username,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: hash,
+        role: role,
+      },
       (err, result) => {
         if (err) return console.log(err);
         console.log("user registered");
@@ -156,4 +167,24 @@ router.get("/users", (req, res) => {
       res.send(result);
     });
 });
+//update users in mongoDB based on ObjectId
+router.route("/users/:_id").put(function (req, res) {
+  db.collection("users").updateOne(
+    { _id: ObjectId(req.params._id) },
+    { $set: req.body },
+    (err, results) => {
+      res.send(results);
+    }
+  );
+});
+
+router.route("/users/:_id").delete(function (req, res) {
+  db.collection("users").findOneAndDelete(
+    { _id: ObjectId(req.params._id) },
+    (err, results) => {
+      res.send(results);
+    }
+  );
+});
+
 module.exports = router;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../auth.service';
 import { items } from '../items';
 import { ItemsService } from '../items.service';
 import { itemsList } from '../mock-items';
@@ -20,8 +21,8 @@ export class ItemsComponent implements OnInit {
   items?: items;
   newPayment?: payment;
   id: number = 0;
-  paymentList : items[] = [];
-  
+  paymentList: items[] = [];
+
   name: string = '';
   private sub: any;
   newItems!: items;
@@ -29,29 +30,46 @@ export class ItemsComponent implements OnInit {
     private route: ActivatedRoute,
     private itemsService: ItemsService,
     private paymentService: PaymentService,
-    private modalService : NgbModal
+    private modalService: NgbModal,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe((params) => {
       this.id = +params['id'];
-      this.itemsService.getAllItems().subscribe((items) =>{
+      this.itemsService.getAllItems().subscribe((items) => {
         this.items = items.find((item) => item.id === this.id);
         console.log(this.items);
-      }); 
+      });
     });
   }
   addToCart() {
-    this.paymentService.addPaymentToDB(this.items!.id, this.items!.name, this.items!.description,this.items!.startingPicture,this.items!.descriptionPicture,this.items!.priceRating,this.items!.sustainabilityRating,this.items!.cost,this.items!.category).subscribe((data) => {
-      this.paymentList.push(data);
-    });
-    console.log(this.items);
+    if (this.authService.isLoggedIn()) {
+      this.paymentService
+        .addPaymentToDB(
+          this.items!.id,
+          this.items!.name,
+          this.items!.description,
+          this.items!.startingPicture,
+          this.items!.descriptionPicture,
+          this.items!.priceRating,
+          this.items!.sustainabilityRating,
+          this.items!.cost,
+          this.items!.category
+        )
+        .subscribe((data) => {
+          this.paymentList.push(data);
+        });
+      console.log(this.items);
+    } else {
+      alert('You must be logged in to add to cart');
+    }
   }
-  openModal(){
+  openModal() {
     const modalRef = this.modalService.open(ReviewsModalContentComponent);
     modalRef.componentInstance.items = this.items;
     modalRef.componentInstance.id = this.id;
-    console.log(this.items)
-    console.log(reviewsList)
+    console.log(this.items);
+    console.log(reviewsList);
   }
 }

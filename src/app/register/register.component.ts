@@ -30,6 +30,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.register = this.fb.group({
       username: '',
+      firstName : '',
+      lastName : '',
+      email : '',
       password: '',
       role: '',
     });
@@ -38,6 +41,9 @@ export class RegisterComponent implements OnInit {
     this.authService
       .regUser(
         this.register.value.username,
+        this.register.value.firstName,
+        this.register.value.lastName,
+        this.register.value.email,
         this.register.value.password,
         this.register.value.role
       )

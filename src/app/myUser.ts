@@ -1,11 +1,8 @@
-export class myUser {
-  name?: string;
-  password?: string;
-  firstName? : string;
-  lastName? : string
-  email? : string
-  profilePicture? : string
-  profession? : string
+export class user {
+  _id !: string;
+  username !: string
+  role !: string
+  password!: string
 
   constructor() {
       

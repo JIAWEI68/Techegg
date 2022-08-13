@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { user } from './myUser';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +13,12 @@ export class AuthService {
   userUrl : string = 'http://localhost:3000/api/users';
   private loggedIn = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient) {}
-  regUser(username: string, pw: string, role: string) {
+  regUser(username: string, firstName : string, lastName : string, email : string, pw: string, role: string) {
     return this.http.post<any[]>(this.regUserUrl, {
       username: username,
+      firstName : firstName,
+      lastName : lastName,
+      email : email,
       password: pw,
       role: role,
     });
@@ -56,7 +60,16 @@ export class AuthService {
   isUser() {
     return this.getUserRole() == 'user' || this.getUserRole() == 'admin';
   }
-  public getAllUsers(){
-    return this.http.get<any[]>(this.userUrl, {'responseType' : 'json'});
+  getAllUsers(){
+    return this.http.get<user[]>(this.userUrl, {'responseType' : 'json'});
+  }
+  updateUser(_id : string, username : string){
+    sessionStorage.setItem('Username', username);
+    return this.http.put<user>(this.userUrl + '/' + _id, {username : username});
+  }
+  deleteUser(_id:string){
+    sessionStorage.removeItem('Username');
+    sessionStorage.removeItem('UserRole');
+    return this.http.delete<user>(this.userUrl + '/' + _id);
   }
 }

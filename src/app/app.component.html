@@ -5,17 +5,17 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="navbar-nav ml-auto" id="navbarContent">
           <li class="nav-item" class="nav-item" id="login">
-            <a class="nav-link" routerLink="/login" routerLinkActive="active" id = "login"
+            <a class="nav-link" [hidden] = "showLogin" routerLink="/login" routerLinkActive="active" id = "login"
               >Login</a
             >
           </li>
           <li class="nav-item" class="nav-item">
-            <a class="nav-link" routerLink="/signup" routerLinkActive="active" id = "signup"
+            <a class="nav-link"  [hidden] = "showSignUp" routerLink="/signup" routerLinkActive="active" id = "signup"
               >Sign Up</a
             >
           </li>
           <li class="nav-item" class="nav-item" style="display: hide;">
-            <a class="nav-link"  routerLink="/logout" routerLinkActive="active" id = "logout"
+            <a class="nav-link"  [hidden] = "showLogout" routerLink="/logout" routerLinkActive="active" id = "logout"
               >Logout</a
             >
           </li>

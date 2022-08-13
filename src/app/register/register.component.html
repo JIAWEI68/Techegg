@@ -9,6 +9,9 @@
 
               <form [formGroup] = "register" novalidate (ngSubmit) = "onSubmit()">
                   <p><input formControlName="username" id="username" placeholder="Your name"/></p>
+                  <p><input formControlName="firstName" id="firstName" placeholder="First Name"/></p>
+                  <p><input formControlName="lastName" id="lastName" placeholder="Last Name"/></p>
+                  <p><input formControlName="email" id="email" placeholder="Your email"/></p>
                   <p><input formControlName="password" id="password" placeholder="Your password" /></p>
                   <!-- <p><input formControlName="role" id="role" placeholder="user/admin" /></p> -->
                   <mat-form-field appearance="fill">

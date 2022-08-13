@@ -129,6 +129,7 @@ export class PaymentComponent implements OnInit {
           actions.order.get().then( (details: any) => {
             console.log('onApprove - you can get full order details inside onApprove: ', details);
             this.resetStatus();
+            location.reload();
           });
         },
         onClientAuthorization : (data) => {
@@ -146,6 +147,8 @@ export class PaymentComponent implements OnInit {
     };
   }
   resetStatus() {
+    this.paymentService.deleteAllPaymentFromDB().subscribe((data) => {
+      console.log(this.paymentListDB);})
     paymentsList.splice(0, paymentsList.length);
     this.finalSum = 0 ;
   }

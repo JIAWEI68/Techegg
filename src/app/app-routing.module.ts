@@ -17,12 +17,29 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegisterComponent },
   { path: 'payment', component: PaymentComponent },
-  {path: 'profile', component: ProfilePageComponent},
-  {path: 'logout', component: LogoutComponent},
-  {path: 'user', component: UserComponent, canActivate: [AuthGuard], data:
-  {permission: {only: ["Student", "Teacher", "Office Worker", "Admin"]}}},
-  {path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data:
-  {permission: {only: ["Admin"]}}},
+  {
+    path: 'profile',
+    component: ProfilePageComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permission: { only: ['Student', 'Teacher', 'Office Worker', 'Admin'] },
+    },
+  },
+  { path: 'logout', component: LogoutComponent },
+  {
+    path: 'user',
+    component: UserComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permission: { only: ['Student', 'Teacher', 'Office Worker', 'Admin'] },
+    },
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: { permission: { only: ['Admin'] } },
+  },
   { path: '', component: HomeComponent, pathMatch: 'full' },
 ];
 

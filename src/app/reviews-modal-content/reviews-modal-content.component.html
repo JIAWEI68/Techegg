@@ -68,7 +68,7 @@
   <div style="text-align: center">
     <h1>Edit Reviews</h1>
   </div>
-  <div *ngFor = "let reviews of reviewsDBList">
+  <div *ngFor = "let reviews of reviewsDBList | slice:0:1;">
     <form
     [formGroup]="myForm"
     (ngSubmit) = "onUpdate(reviews._id)"
@@ -79,8 +79,8 @@
           <p>
             <input
               formControlName="username"
-              id= {{reviews.username}}
-              value="{{ reviews.username }}"
+              id= username
+              value=""
             />
           </p>
         </div>

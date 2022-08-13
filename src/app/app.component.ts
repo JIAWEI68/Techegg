@@ -13,6 +13,9 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'Techegg';
   items!: items;
+  showSignUp: boolean = false;
+  showLogin : boolean = false;
+  showLogout : boolean = true;
   isLoggedIn!: Observable<boolean>;
   constructor(private authService: AuthService, private router : Router) {
     ItemsService.call;
@@ -20,10 +23,14 @@ export class AppComponent implements OnInit {
   ngOnInit() : void{
     // this.isLoggedIn = this.authService.isLoggedInCheck;
     if(this.authService.isLoggedIn() == true){
-      document.getElementById('login')!.style.display = 'none'
+     this.showLogin = true;
+     this.showSignUp = true; 
+     this.showLogout = false;
     }
    else{
-      (document.getElementById('logout') as HTMLElement).style.display = 'none';
+      this.showLogin = false
+      this.showSignUp = false;
+      this.showLogout = true;
     }
   } 
   goToHome(){
@@ -35,9 +42,11 @@ export class AppComponent implements OnInit {
   goToHomePage(){
     if(this.authService.isLoggedIn() == true){
       this.router.navigateByUrl('/user')
+      location.reload();
     }
     else{
       this.router.navigateByUrl('/')
+      
     }
   }
 }

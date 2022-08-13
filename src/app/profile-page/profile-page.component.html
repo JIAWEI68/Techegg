@@ -4,6 +4,29 @@
       <div class="col-lg-8 col-xl-6">
         <div class="card rounded-3">
           <div class="card-body p-4 p-md-5">
+            <div
+              class="container"
+              style="
+                position: absolute;
+                right: 0;
+                margin-right: 0px;
+                width: max-content;
+                width: 1000;
+              "
+            >
+              <div
+                *ngFor="let users of stringArray"
+                class="shoppingCart"
+                style="position: 0; right: 0; margin-right: 0px"
+              >
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAABmUlEQVRoge2ZPU7DQBBGX4gilAoaqAiCI6RGtBQ0cCRKbgQN3AWQQNCFIgU/CQUOsOMonrVnNsTZJ7mwIn8zX2Z2R2tDJpOx5AKYVlyXS8uuAk3y5iY6C36bWgUxYm6uG6mzsCYbWAWuCRfgmWOscxHrquoBTQXuxf1+fF5qpLaMXUJj4EHcD9TpxCO1ZewSa1EBKeJZgSQGPCsg/5xKAxo2gQm/O8MH0LMQFvQK7VmcSRHbhCfC7e3ASvgPhyLGo+Yh7SBL0UbR/Q/ZgCmuBlIMs+ghBvUr4GFgPVtIyy7hFjeyFC8YiRg7luIdYCwCbBnqbwvtMYuPuz9oW2hKeVFZttG89lGdyWNOZJ7roHb/NzFguRMlMeA5C2rNAGhmwLOFXAy0bg38CwMx9AkPNm9A10C3C7wTHmT6BrpzeSEcOHsGmgOh+RzzcOybOY82atQ+TQ1YbKVLNbByFfAYZrWHGLSgArEM0X9GqnsNPQ10+C6xV/J3KM8BTTghfINmdX0Cp97JzzgGboFXg8RHwA1wlCr5TKZNfAER3NeWcGRWYAAAAABJRU5ErkJggg=="
+                  height="20"
+                  width="20"
+                  (click)="deleteProfile(users._id)"
+                />
+              </div>
+            </div>
             <h3
               class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2"
               style="text-align: center"
@@ -19,8 +42,31 @@
               </button>
             </h3>
 
-            <form class="px-md-2" *ngFor = "let profile of userFilteredList[0]">
-              <div class="form-outline mb-4">
+            <form
+              class="px-md-2"
+              [formGroup]="editProfile"
+              *ngFor="let user of stringArray"
+              (ngSubmit)="updateProfile(user._id)"
+            >
+              <p>
+                <input
+                  formControlName="name"
+                  id="username"
+                  placeholder="Your name"
+                />
+              </p>
+              <!-- <p><input formControlName="imageUrl" id="password" placeholder="Your password" /></p> -->
+              <p>
+                <input
+                  formControlName="role"
+                  id="role"
+                  placeholder="Your role"
+                />
+              </p>
+              <p>
+                <button class="btn btn-primary" type="submit">Update</button>
+              </p>
+              <!-- <div class="form-outline mb-4">
                 <label class="form-label" for="form3Example1q">Username</label>
                 <input type="text" id="form3Example1q" class="form-control" />
               </div>
@@ -53,7 +99,7 @@
               </div>
               <button type="submit" class="btn btn-success btn-lg mb-1">
                Update
-              </button>
+              </button> -->
             </form>
           </div>
         </div>
