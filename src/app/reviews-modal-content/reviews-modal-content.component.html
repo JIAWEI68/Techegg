@@ -6,12 +6,12 @@
     </button>
   </div>
 </div>
-<div class="card" *ngFor="let reviews of reviewsDBList">
-  <p (click)="edit(editcontent)">{{ reviews.username }}</p>
+<div class="card" *ngFor="let reviews of reviewsDBList; let i = index">
+  <p (click)="edit(editcontent, reviews._id)">{{ reviews.username }}</p>
   <button mat-fab color="primary" aria-label="Example icon button with a delete icon" style="margin-left: 400px" (click) = "delete(reviews._id)">
     <mat-icon>delete</mat-icon>
   </button>
-  <p (click)="edit(editcontent)">{{ reviews.description }}</p>
+  <p (click)="edit(editcontent, reviews._id)">{{ reviews.description }}</p>
 </div>
 
 <ng-template #content let-modal>
@@ -68,10 +68,11 @@
   <div style="text-align: center">
     <h1>Edit Reviews</h1>
   </div>
-  <div *ngFor = "let reviews of reviewsDBList | slice:0:1;">
-    <form
+  <div>
+    <div >
+      <form 
     [formGroup]="myForm"
-    (ngSubmit) = "onUpdate(reviews._id)"
+    (ngSubmit) = "onUpdate(_id)"
   >
     <div class="container">
       <div class="row">
@@ -90,7 +91,7 @@
           <p>
             <input
               formControlName="description"
-              id = {{reviews._id}}_description
+              id = {{_id}}_description
             />
           </p>
         </div>
@@ -104,5 +105,6 @@
       </div>
     </div>
   </form>
+    </div>
   </div>
 </ng-template>

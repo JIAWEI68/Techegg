@@ -27,6 +27,8 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
   newReviews!: reviews;
   itemsName!: string;
   reviews = this.reviewsDBList;
+  _id :string = '';
+  i : number = 0;
   private sub: any;
   // username : string = this.newReviews.username;
   // username : string = (document.getElementById('username') as HTMLInputElement).value;
@@ -85,12 +87,13 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
     console.log(this.newReviews);
     console.log(this.reviewsList);
   }
-  edit(content: any) {
+  edit(content: any, _id : string) {
     
     // console.log(this.newReviews.id);
    if (this.authService.isLoggedIn()) {
       this.modalService.open(content);
       this.myForm.reset;
+    this._id = _id;
     } else {
       alert('You must be logged in to edit a review');
     }
