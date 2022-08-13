@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { passwordMatchValidator } from '../custom.validator';
 import { select } from '../select';
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
     { value: 'Office Worker' },
     { value: 'Admin' },
   ];
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -29,25 +30,31 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.register = this.fb.group({
-      username: '',
-      firstName : '',
-      lastName : '',
-      email : '',
-      password: '',
-      role: '',
+      username: [ '', Validators.required],
+      firstName : ['', Validators.required],
+      lastName : ['', Validators.required],
+      email : ['', [Validators.required, Validators.email]],
+      pwSet: this.fb.group ({
+        password: ['', [Validators.required,
+          Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required]]
+      }, {validators : passwordMatchValidator}),
+      role: [ '', Validators.required ],
     });
   }
   onSubmit() {
-    this.authService
+    if(this.register.valid){
+      this.authService
       .regUser(
         this.register.value.username,
         this.register.value.firstName,
         this.register.value.lastName,
         this.register.value.email,
-        this.register.value.password,
+        this.register.get('pwSet.password')!.value,
         this.register.value.role
       )
       .subscribe();
-    this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login');
+    }
   }
 }

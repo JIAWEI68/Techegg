@@ -30,6 +30,7 @@
     "creditcardpayments": "^1.0.3",
     "express": "^4.18.1",
     "mongodb": "^4.8.1",
+    "ng-password-validation": "^1.0.9",
     "ngx-paypal": "^9.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",

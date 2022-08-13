@@ -11,7 +11,7 @@ import { ItemsService } from './items.service';
 import { ItemsComponent } from './items/items.component';
 import { PaymentComponent } from './payment/payment.component';
 import { PaymentService } from './payment.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FilterPipe } from './home/filter.pipe';
 import { ReviewsModalContainerComponent } from './reviews-modal-container/reviews-modal-container.component';
 import { ReviewsModalContentComponent } from './reviews-modal-content/reviews-modal-content.component';

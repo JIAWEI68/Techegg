@@ -1,70 +1,160 @@
-<section class="vh-100 bg-image" style="width : 1000px; height: 500px;">
+<section class="vh-100 bg-image" style="width: 1000px; height: 500px">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-          <div class="card" style="border-radius: 15px;">
+          <div class="card" style="border-radius: 15px">
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
-              <form [formGroup] = "register" novalidate (ngSubmit) = "onSubmit()">
-                  <p><input formControlName="username" id="username" placeholder="Your name"/></p>
-                  <p><input formControlName="firstName" id="firstName" placeholder="First Name"/></p>
-                  <p><input formControlName="lastName" id="lastName" placeholder="Last Name"/></p>
-                  <p><input formControlName="email" id="email" placeholder="Your email"/></p>
-                  <p><input formControlName="password" id="password" placeholder="Your password" /></p>
-                  <!-- <p><input formControlName="role" id="role" placeholder="user/admin" /></p> -->
-                  <mat-form-field appearance="fill">
-                    <mat-label>Roles</mat-label>
-                    <mat-select formControlName = "role" id = "role">
-                      <mat-option  *ngFor = "let select of selectList" [value] = "select.value">
-                        {{select.value}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <p><button class="btn btn-primary" type="submit" >Register</button></p>
-          
-                <!-- <div class="form-outline mb-4">
-                    <label class="form-label" for="username">Username</label>
-                  <input type="text" formControlName = "username" id="username" class="form-control form-control-lg" />
-                  
+              <form [formGroup]="register" novalidate (ngSubmit)="onSubmit()">
+                <div class="container">
+                  <div class="row">
+                    <div
+                      *ngIf="register.invalid"
+                      class="col-sm-6 col-sm-offset-3"
+                    >
+                      <p
+                        *ngIf="
+                          register.controls.username.dirty &&
+                          register.controls.username.hasError('required')
+                        "
+                      >
+                        * Username is required
+                      </p>
+                      <p
+                        *ngIf="
+                          register.controls.firstName.dirty &&
+                          register.controls.firstName.hasError('required')
+                        "
+                      >
+                        * First Name is required
+                      </p>
+                      <p
+                        *ngIf="
+                          register.controls.lastName.dirty &&
+                          register.controls.lastName.hasError('required')
+                        "
+                      >
+                        * Last Name is required
+                      </p>
+                      <p
+                        *ngIf="
+                          register.controls.email.dirty &&
+                          register.controls.email.hasError('required')
+                        "
+                      >
+                        * Email is required
+                      </p>
+                      <p
+                        *ngIf="
+                          register.controls.email.dirty &&
+                          register.controls.email.hasError('email')
+                        "
+                      >
+                        * Email is invalid!
+                      </p>
+                      <p
+                        *ngIf="
+                          register.get('pwSet')?.get('password')?.dirty &&
+                          register
+                            .get('pwSet')
+                            ?.get('password')
+                            ?.hasError('required')
+                        "
+                      >
+                        Password is required!
+                      </p>
+                      <p
+                        *ngIf="
+                          register.get('pwSet')?.get('password')?.dirty &&
+                          register
+                            .get('pwSet')
+                            ?.get('password')
+                            ?.hasError('minlength')
+                        "
+                      >
+                        Password must have a minimum of 8 characters!
+                      </p>
+                      <p *ngIf="register.controls.pwSet.hasError('notmatch')">
+                        * Password does not match!
+                      </p>
+                    </div>
+                  </div>
                 </div>
-
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="username">Password</label>
-                  <input type="password" formControlName = "password" id="password" class="form-control form-control-lg" />
-                  
+                <p>
+                  <input
+                    formControlName="username"
+                    id="username"
+                    placeholder="Your name"
+                  />
+                </p>
+                <p>
+                  <input
+                    formControlName="firstName"
+                    id="firstName"
+                    placeholder="First Name"
+                  />
+                </p>
+                <p>
+                  <input
+                    formControlName="lastName"
+                    id="lastName"
+                    placeholder="Last Name"
+                  />
+                </p>
+                <p>
+                  <input
+                    formControlName="email"
+                    id="email"
+                    placeholder="Your email"
+                  />
+                </p>
+                <div formGroupName="pwSet">
+                  <p>
+                    <input
+                      formControlName="password"
+                      id="password"
+                      placeholder="Your password"
+                    />
+                  </p>
                 </div>
-
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example4cg">First Name</label>
-                  <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
-                  
+                <div formGroupName="pwSet">
+                  <p>
+                    <input
+                      formControlName="confirmPassword"
+                      id="confirmPassword"
+                      placeholder="Confirm Password"
+                    />
+                  </p>
                 </div>
-
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example4cdg">Last Name</label>
-                  <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
-                  
-                </div>
-                <div class="form-outline mb-4">
-                    <label class="form-label" for="form3Example4cdg">Email</label>
-                    <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
-                  </div>    
-                  <div class="mb-4 pb-2">
-                    <p>Profession</p>
-                    <select class="select" style="width: 250px;" formControlName = "role" id="role">
-                      <option value="Student" *ngFor ="let roles of selectList" [ngValue] = "roles">{{roles}}</option>
-                    </select>
-                  </div> -->
-                  <!-- <div class="d-flex justify-content-center">
-                    <button type="button"
-                      class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
-                  </div> -->
-                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a routerLink="/login" routerLinkActive="active"
-                    class="fw-bold text-body"><u>Login here</u></a></p>
+                <!-- <p><input formControlName="role" id="role" placeholder="user/admin" /></p> -->
+                <mat-form-field appearance="fill">
+                  <mat-label>Roles</mat-label>
+                  <mat-select formControlName="role" id="role">
+                    <mat-option
+                      *ngFor="let select of selectList"
+                      [value]="select.value"
+                    >
+                      {{ select.value }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <p>
+                  <button class="btn btn-primary" type="submit">
+                    Register
+                  </button>
+                </p>
+                <p class="text-center text-muted mt-5 mb-0">
+                  Have already an account?
+                  <a
+                    routerLink="/login"
+                    routerLinkActive="active"
+                    class="fw-bold text-body"
+                    ><u>Login here</u></a
+                  >
+                </p>
               </form>
-
             </div>
           </div>
         </div>
