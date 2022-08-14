@@ -68,12 +68,17 @@ export class ProfilePageComponent implements OnInit {
     );
   }
   deleteProfile(_id : string){
-    this.router.navigateByUrl('/logout');
-    this.authService.deleteUser(_id).subscribe(
-      (data) => {
-        console.log(data);
-        location.reload();
-      }
-    );
+    confirm("Are you sure you want to delete your account?");
+    if(confirm("Are you sure you want to delete your account?") == true){
+      this.authService.deleteUser(_id).subscribe(
+        (data) => {
+          console.log(data);
+          this.router.navigate(['/logout']);
+        }
+      );
+    }
+    else{
+      this.router.navigate(['/profile']);
+    }
   }
 }
