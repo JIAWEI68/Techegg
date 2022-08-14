@@ -44,12 +44,12 @@
                 <input
                   formControlName="firstName"
                   id="firstName"
-                  placeholder="{{ users.firstName }}"
+                  [(ngModel)]=" users.firstName "
                 />
               </p>
-              <p><input formControlName = "lastName" id = "lastName" placeholder="{{users.lastName}}"></p>
-              <p><input formControlName = "email" id = "email" placeholder="{{users.email}}"></p>
-              <p><input formControlName="imageUrl" id="image" placeholder="Your image link" /></p>
+              <p><input formControlName = "lastName" id = "lastName" [(ngModel)]="users.lastName"></p>
+              <p><input formControlName = "email" id = "email" [(ngModel)]="users.email"></p>
+              <p><input formControlName="imageUrl" id="image" placeholder="Your image link" [(ngModel)] = "users.imageUrl" /></p>
               <p>
                 <input
                   formControlName="role"
