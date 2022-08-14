@@ -24,13 +24,16 @@ export class ItemsService {
     return this.http.get(this.url, {responseType: 'text'});
   }
   addItem(item: items) {
-    return this.http.post<items>(this.url + "/" + "post",    item);
+    return this.http.post<items>(this.url + "/" + "post", item);
   }
   getAllItems() {
     return this.http.get<items[]>(this.url, {responseType: 'json'});
    }
    getItemsById(id: string) {
     return this.http.get<items>(`${this.url}/${id}`);
+  }
+  deleteItemFromDB(id : string){
+    return this.http.delete<items>(this.url + '/' + "delete" + "/" + id);
   }
 
 }

@@ -21,12 +21,12 @@ export class PaymentService {
     paymentsList.forEach((a) => (sum += a.cost));
     return sum;
   }
-  delete(items: items): payment[] {
-    paymentsList.forEach((value) => {
-      if (value === items) paymentsList.splice(0, 1);
-    });
-    return paymentsList;
-  }
+  // delete(items: items): payment[] {
+  //   paymentsList.forEach((value) => {
+  //     if (value === items) paymentsList.splice(0, 1);
+  //   });
+  //   return paymentsList;
+  // }
   getAllPayment(){
     return this.http.get<items[]>(this.url);
   }

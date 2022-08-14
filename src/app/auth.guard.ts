@@ -28,11 +28,16 @@ export class AuthGuard implements CanActivate {
       permission.only.includes(this.authService.getUserRole())
     ) {
       return true;
-    } else {
+    }
+    else if(permission.only.includes(this.authService.getUserRole() == "Admin")){
+      alert("You are not authorized to access this page");
+      return false;
+    } 
+    else {
       console.log(
         'You had been logout, You are not authorized to access the page'
       );
-      this.router.navigateByUrl('/logout');
+      alert("You are not logged in")
       return false;
     } 
   }

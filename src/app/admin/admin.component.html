@@ -1,1 +1,87 @@
-<p>admin works!</p>
+<section class="vh-100 bg-image" style="width: 1000px; height: 500px">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="card" style="border-radius: 15px">
+              <div class="card-body p-5">
+                <h2 class="text-uppercase text-center mb-5">Add an Item</h2>
+  
+                <form [formGroup]="addItem" (ngSubmit)="onSubmit()">
+                  <p>
+                    <input
+                      formControlName="name"
+                      id="name"
+                      placeholder="Name of items"
+                    />
+                  </p>
+                  <p>
+                    <input
+                      formControlName="description"
+                      id="description"
+                      placeholder="Description of item"
+                    />
+                  </p>
+                  <p>
+                    <input
+                    type="number"
+                      formControlName="cost"
+                      id="cost"
+                      placeholder="Cost of items"
+                    />
+                  </p>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Category</mat-label>
+                    <mat-select formControlName="category" id="role">
+                      <mat-option
+                        *ngFor="let select of selectList"
+                        [value]="select"
+                      >
+                        {{ select }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <p>
+                    <input
+                      formControlName="startPicture"
+                      id="startPicture"
+                      placeholder="Link to starting picture"
+                    />
+                  </p>
+                  <p>
+                    <input
+                      formControlName="descriptionPicture"
+                      id="descriptionPicture"
+                      placeholder="Link to description picture"
+                    />
+                  </p>
+                  <p>
+                    <input
+                      formControlName="priceRating"
+                      id="priceRating"
+                      type="number"
+                      placeholder="Rating of price"
+                    />
+                  </p>
+                  <p>
+                    <input
+                      formControlName="sustainabilityRating"
+                      id="sustainabilityRating"
+                      type="number"
+                      placeholder="Rating of how well the item can last"
+                    />
+                  </p>
+                  <p>
+                    <button class="btn btn-primary" type="submit">
+                      Add Item
+                    </button>
+                  </p>
+                  <!-- <p><input formControlName="role" id="role" placeholder="user/admin" /></p> -->
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

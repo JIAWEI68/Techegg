@@ -81,9 +81,9 @@ export class PaymentComponent implements OnInit {
     } );
     this.initiConfig();
   }
-  delete(items: items) {
-    this.paymentService.delete(items);
-  }
+  // delete(items: items) {
+  //   this.paymentService.delete(items);
+  // }
   private initiConfig(): void {
     this.paypalsConfig = {
       currency: 'USD',

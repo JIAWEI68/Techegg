@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { items } from '../items';
 import { ItemsService } from '../items.service';
@@ -18,13 +19,15 @@ export class UserComponent implements OnInit {
   searchText: string = '';
   filterKeys = filterKeys;
   resultArray = resultArray;
+  showDelete : boolean = true
   category = this.itemsService.category.toLowerCase();
   constructor(
     private itemsService: ItemsService,
     private searchPipe : SearchPipe,
     private categoryPipe: CategoryPipe,
     private paymentService: PaymentService,
-    private authService : AuthService
+    private authService : AuthService,
+    private route : Router
   ) {}
   ngOnInit() {
     if(this.authService.getUserRole() == 'Student'){
@@ -45,6 +48,12 @@ export class UserComponent implements OnInit {
       this.searchText
     )),
       this.categoryPipe.transform(this.itemsList, filterKeys);
+      if(this.authService.getUserRole() == "Admin"){
+        this.showDelete = false
+      }
+      else{
+        this.showDelete = true
+      }
   }
   paymentList = this.paymentService.getPayments();
   onCheck(checked: boolean, $value: string) {
@@ -63,6 +72,15 @@ export class UserComponent implements OnInit {
         console.log(this.itemsDBList) 
       });
     }
+  }
+  onDelete(id: string){
+    this.itemsService.deleteItemFromDB(id).subscribe(
+      (data) => {
+        console.log(data);
+        alert('Item Deleted');
+        this.route.navigateByUrl('/users');
+      }
+    );
   }
 
 }

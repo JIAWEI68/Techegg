@@ -22,7 +22,7 @@ const routes: Routes = [
     component: ProfilePageComponent,
     canActivate: [AuthGuard],
     data: {
-      permission: { only: ['Student', 'Teacher', 'Office Worker', 'Admin'] },
+      permission: { only: ['Student', 'Teacher', 'Office Worker'] },
     },
   },
   { path: 'logout', component: LogoutComponent },
