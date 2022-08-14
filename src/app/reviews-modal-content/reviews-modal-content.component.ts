@@ -51,13 +51,13 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
       id: '',
       username: this.authService.getSecureToken(),
       description: '',
-      itemsId: this.id,
+      itemsId: this._id,
     });
     this.updateForm = this.fb.group({
       id: '',
       username: this.authService.getSecureToken(),
       description: '',
-      itemsId: this.id,
+      itemsId: this._id,
     });
     this.reviewsList = this.reviewsList.filter(
       (reviews) => reviews.itemsId === this._id

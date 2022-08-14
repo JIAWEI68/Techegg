@@ -177,14 +177,33 @@ router.route("/users/:_id").delete(function (req, res) {
   );
 });
 //get items by id
-router.get('/items/:_id', (req, res) => {
-  const {_id } = req.params._id; 
+router.get("/items/:_id", (req, res) => {
+  const { _id } = req.params._id;
   // Get posts from db collection
-  db.collection('items').findOne({ _id: ObjectId(req.params._id) }, (err, result) => {
+  db.collection("items").findOne(
+    { _id: ObjectId(req.params._id) },
+    (err, result) => {
       if (err) return console.log(err);
       res.send(result);
-    });
-}
-);
+    }
+  );
+});
+router.route("/items/post").post((req, res) => {
+  db.collection("items").insertOne(req.body, (err, result) => {
+    if (err) return console.log(err);
+    console.log("saved to database");
+    res.send(result);
+  });
+});
+router.route("/items/delete/:_id").delete((req, res) => {
+  db.collection("items").findOneAndDelete(
+    { _id: ObjectId(req.params._id) },
+    (err, result) => {
+      if (err) return console.log(err);
+      console.log("deleted from database");
+      res.send(result);
+    }
+  );
+});
 
 module.exports = router;
