@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   showSignUp: boolean = false;
   showLogin: boolean = false;
   showLogout: boolean = true;
+  showAdmin : boolean = true;
   isLoggedIn!: Observable<boolean>;
   constructor(private authService: AuthService, private router: Router) {
     ItemsService.call;
@@ -30,6 +31,12 @@ export class AppComponent implements OnInit {
       this.showLogin = false;
       this.showSignUp = false;
       this.showLogout = true;
+    }
+    if(this.authService.getUserRole() ==  'Admin'){
+      this.showAdmin = false;
+    }
+    else{
+      this.showAdmin = true;
     }
   }
   goToHome() {

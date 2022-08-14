@@ -1,6 +1,6 @@
 export class reviews {
   _id !: string;
-  itemsId !: number;
+  itemsId !: string;
     itemName !: string
     username!: string;
     description!: number;

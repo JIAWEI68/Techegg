@@ -51,6 +51,9 @@ export class ProfilePageComponent implements OnInit {
     if(this.imageUrl == ""){
       this.imageUrl = "https://img.icons8.com/small/60/undefined/user-male-circle.png"
     }
+    else if(this.stringArray[0].imageUrl == undefined){
+      this.imageUrl = "https://img.icons8.com/small/60/undefined/user-male-circle.png"
+    }
     else{
       this.imageUrl = this.stringArray?.[0]?.imageUrl
     }

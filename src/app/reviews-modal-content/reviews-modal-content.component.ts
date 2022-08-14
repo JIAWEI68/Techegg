@@ -27,7 +27,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
   newReviews!: reviews;
   itemsName!: string;
   reviews = this.reviewsDBList;
-  _id :string = '';
+  _id :string = '0';
   i : number = 0;
   private sub: any;
   // username : string = this.newReviews.username;
@@ -43,7 +43,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
   ) {}
   ngOnInit(): void {
     this.reviewsService.getAllReviews().subscribe((data) => {
-      this.reviewsDBList = data.filter((reviews) => reviews.itemsId == this.id);
+      this.reviewsDBList = data.filter((reviews) => reviews.itemsId == this._id);
       console.log(this.reviewsDBList);
     });
     this.myForm = this.fb.group({
@@ -59,7 +59,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
       itemsId: this.id,
     });
     this.reviewsList = this.reviewsList.filter(
-      (reviews) => reviews.itemsId === this.id
+      (reviews) => reviews.itemsId === this._id
     );
     console.log(reviewsList);
     console.log(this.id);
@@ -78,9 +78,10 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
     this.newReviews = new reviews();
     this.newReviews.username = this.myForm.value.username;
     this.newReviews.description = this.myForm.value.description;
-    this.newReviews.itemsId = this.items.id;
+    this.newReviews.itemsId = this.items._id;
     this.reviewsService.addReviewsDB(this.newReviews).subscribe((data) => {
       this.reviewsDBList.push(data);
+      location.reload();
     });
     formDirective.resetForm();
     this.myForm.reset;
@@ -103,7 +104,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
     this.newReviews._id = id;
     this.newReviews.username = username;
     this.newReviews.description = this.myForm.value.description;
-    this.newReviews.itemsId = this.items.id;
+    this.newReviews.itemsId = this.items._id;
     this.reviewsService.editReviews(this.newReviews, id).subscribe((data) => {
       {
         reviewsList[this.reviewsList.indexOf(data)].description =

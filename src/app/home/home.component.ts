@@ -10,6 +10,7 @@ import { FilterPipe } from './filter.pipe';
 import { CategoryFilterPipe } from './category-filter.pipe';
 import { PaymentService } from '../payment.service';
 import { filterKeys, resultArray } from '../mock-items';
+import { Router } from '@angular/router';
 
 @Component({
   providers: [FilterPipe, CategoryFilterPipe],
@@ -28,7 +29,8 @@ export class HomeComponent implements OnInit {
     private itemsService: ItemsService,
     private filterPipe: FilterPipe,
     private categoryFilter: CategoryFilterPipe,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private route : Router
   ) {}
   ngOnInit() {
     this.itemsService.getAllItems().subscribe((data) => {
@@ -62,4 +64,9 @@ export class HomeComponent implements OnInit {
       });
     }
   }
+  goToDetails(_id : string){
+    console.log(_id);
+    this.route.navigate(['/items', _id]);
+  }
+
 }

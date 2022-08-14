@@ -13,7 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
-  { path: 'items/:id', component: ItemsComponent },
+  { path: 'items/:_id', component: ItemsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegisterComponent },
   { path: 'payment', component: PaymentComponent },

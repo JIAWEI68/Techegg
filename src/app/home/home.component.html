@@ -58,10 +58,9 @@
                 | filter: searchText
                 | categoryFilter: filterKeys
             " style="position: relative; margin-top: 40px; border-color: black;">
-            <img routerLink="/items" [routerLink]="['/items', items.id]" routerLinkActive="active"
+            <img (click) = "goToDetails(items._id)"
               src="{{ items.startingPicture }}" height="300" width="390" />
-            <p routerLink="/items" routerLinkActive="active"></p>
-            <p [routerLink]="['/items', items.id]" routerLinkActive="active">
+            <p (click) = "goToDetails(items._id)" >
               {{ items.name }}
             </p>
           </div>

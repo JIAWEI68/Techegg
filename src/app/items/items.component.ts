@@ -21,6 +21,7 @@ export class ItemsComponent implements OnInit {
   items?: items;
   newPayment?: payment;
   id: number = 0;
+  _id: string = '0';
   paymentList: items[] = [];
 
   name: string = '';
@@ -35,12 +36,12 @@ export class ItemsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.sub = this.route.params.subscribe((params) => {
-      this.id = +params['id'];
-      this.itemsService.getAllItems().subscribe((items) => {
-        this.items = items.find((item) => item.id === this.id);
-        console.log(this.items);
-      });
+    this._id = this.route.snapshot.paramMap.get('_id')!;
+    console.log(this._id);
+    this.itemsService.getItemsById(this._id).subscribe((data) => {
+      console.log(data);
+      this.items = data;
+      console.log(this.items);
     });
   }
   addToCart() {
@@ -68,7 +69,7 @@ export class ItemsComponent implements OnInit {
   openModal() {
     const modalRef = this.modalService.open(ReviewsModalContentComponent);
     modalRef.componentInstance.items = this.items;
-    modalRef.componentInstance.id = this.id;
+    modalRef.componentInstance._id = this.items?._id;
     console.log(this.items);
     console.log(reviewsList);
   }

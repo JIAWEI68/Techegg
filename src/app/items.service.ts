@@ -29,4 +29,8 @@ export class ItemsService {
   getAllItems() {
     return this.http.get<items[]>(this.url, {responseType: 'json'});
    }
+   getItemsById(id: string) {
+    return this.http.get<items>(`${this.url}/${id}`);
+  }
+
 }

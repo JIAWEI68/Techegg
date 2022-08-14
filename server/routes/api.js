@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectId;
 const bycrpt = require("bcryptjs");
+const { ObjectID } = require("bson");
 const BYCRYPT_SALT_ROUNDS = 12;
 var db;
 
@@ -71,17 +72,6 @@ router.get("/items", (req, res) => {
   // This should ideally be replaced with a service that connects to MongoDB
   db.collection("items")
     .find()
-    .toArray((err, result) => {
-      if (err) return console.log(err);
-      res.send(result);
-    });
-});
-
-router.get("/items/:id", (req, res) => {
-  // Get posts from the mock api
-  // This should ideally be replaced with a service that connects to MongoDB
-  db.collection("items")
-    .find({ id: router.param.id })
     .toArray((err, result) => {
       if (err) return console.log(err);
       res.send(result);
@@ -186,5 +176,15 @@ router.route("/users/:_id").delete(function (req, res) {
     }
   );
 });
+//get items by id
+router.get('/items/:_id', (req, res) => {
+  const {_id } = req.params._id; 
+  // Get posts from db collection
+  db.collection('items').findOne({ _id: ObjectId(req.params._id) }, (err, result) => {
+      if (err) return console.log(err);
+      res.send(result);
+    });
+}
+);
 
 module.exports = router;
