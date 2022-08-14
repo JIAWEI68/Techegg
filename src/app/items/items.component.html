@@ -19,22 +19,22 @@
       <b>Rating</b>
       <br />
       <p>
-        Price
+        Price : {{items?.priceRating}} / 5
         <img
           style="padding-right: 10cm"
-          src="assets/Group 40.png"
+          src=""
           height="20"
         />
       </p>
       <p>
-        Sustainability
+        Sustainability : {{items?.sustainabilityRating}} / 5
         <img
           style="padding-right: 10cm"
-          src="assets/Group 40.png"
+          src=""
           height="20"
         />
       </p>
-      <p>{{ items?.cost | currency : 'SGD'}}</p>
+      <p>Cost : {{ items?.cost | currency : 'SGD'}}</p>
       <button mat-raised-button color = "primary" (click) = "openModal()">Reviews</button>
     </div>
     <div

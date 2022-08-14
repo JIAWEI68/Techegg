@@ -37,6 +37,8 @@ import {MatSelectModule} from '@angular/material/select'
 import { NgxPayPalModule } from 'ngx-paypal';
 import { SearchPipe } from './user/search-pipe.pipe';
 import { CategoryPipe } from './user/category.pipe';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { AdminEditComponent } from './admin-edit/admin-edit.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import { CategoryPipe } from './user/category.pipe';
     AdminComponent,
     SearchPipe,
     CategoryPipe,
+    AdminEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +79,7 @@ import { CategoryPipe } from './user/category.pipe';
     HttpClientModule,
     MatSelectModule,
     NgxPayPalModule,
+    MatFormFieldModule
   ],
   providers: [
     ItemsService,

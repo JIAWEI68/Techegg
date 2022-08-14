@@ -205,5 +205,16 @@ router.route("/items/delete/:_id").delete((req, res) => {
     }
   );
 });
-
+//edit item from mongoDB based on ObjectId
+router.route("/items/:_id").put((req, res) => {
+  db.collection("items").updateOne(
+    { _id: ObjectId(req.params._id) },
+    { $set: req.body },
+    (err, result) => {
+      if (err) return console.log(err);
+      console.log("updated in database");
+      res.send(result);
+    }
+  );
+})
 module.exports = router;

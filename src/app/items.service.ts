@@ -35,5 +35,7 @@ export class ItemsService {
   deleteItemFromDB(id : string){
     return this.http.delete<items>(this.url + '/' + "delete" + "/" + id);
   }
-
+  editItem(id: string, items: items) {
+    return this.http.put<items>(this.url + '/' + id, items);
+  }
 }

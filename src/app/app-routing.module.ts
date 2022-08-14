@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminEditComponent } from './admin-edit/admin-edit.component';
 import { AdminComponent } from './admin/admin.component';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
@@ -16,7 +17,14 @@ const routes: Routes = [
   { path: 'items/:_id', component: ItemsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegisterComponent },
-  { path: 'payment', component: PaymentComponent },
+  {
+    path: 'payment',
+    component: PaymentComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permission: { only: ['Student', 'Teacher', 'Office Worker'] },
+    },
+  },
   {
     path: 'profile',
     component: ProfilePageComponent,
@@ -40,6 +48,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { permission: { only: ['Admin'] } },
   },
+  {path : 'adminEdit/:_id', component : AdminEditComponent, canActivate: [AuthGuard], data: { permission: { only: ['Admin'] } }},
   { path: '', component: HomeComponent, pathMatch: 'full' },
 ];
 

@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { items } from '../items';
 import { ItemsService } from '../items.service';
 import { filterKeys, resultArray } from '../mock-items';
+import { user } from '../myUser';
 import { PaymentService } from '../payment.service';
 import { CategoryPipe } from './category.pipe';
 import { SearchPipe } from './search-pipe.pipe';
@@ -81,6 +82,15 @@ export class UserComponent implements OnInit {
         this.route.navigateByUrl('/users');
       }
     );
+  }
+  goToDetails(_id : string){
+   if(this.authService.getUserRole() == "Admin"){
+    this.route.navigate(['/adminEdit', _id]);
+   }
+   else{
+    console.log(_id);
+    this.route.navigate(['/items', _id]);
+   }
   }
 
 }

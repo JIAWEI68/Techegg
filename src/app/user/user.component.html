@@ -147,12 +147,12 @@
             style="position: relative; margin-top: 40px; border-color: black"
           >
             <img
-              [routerLink]="['/items', items._id]"
+              (click) = "goToDetails(items._id)"
               src="{{ items.startingPicture }}"
               height="300"
               width="390"
             />
-            <p [routerLink]="['/items', items._id]">
+            <p>
               {{ items.name }} <img
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAABmUlEQVRoge2ZPU7DQBBGX4gilAoaqAiCI6RGtBQ0cCRKbgQN3AWQQNCFIgU/CQUOsOMonrVnNsTZJ7mwIn8zX2Z2R2tDJpOx5AKYVlyXS8uuAk3y5iY6C36bWgUxYm6uG6mzsCYbWAWuCRfgmWOscxHrquoBTQXuxf1+fF5qpLaMXUJj4EHcD9TpxCO1ZewSa1EBKeJZgSQGPCsg/5xKAxo2gQm/O8MH0LMQFvQK7VmcSRHbhCfC7e3ASvgPhyLGo+Yh7SBL0UbR/Q/ZgCmuBlIMs+ghBvUr4GFgPVtIyy7hFjeyFC8YiRg7luIdYCwCbBnqbwvtMYuPuz9oW2hKeVFZttG89lGdyWNOZJ7roHb/NzFguRMlMeA5C2rNAGhmwLOFXAy0bg38CwMx9AkPNm9A10C3C7wTHmT6BrpzeSEcOHsGmgOh+RzzcOybOY82atQ+TQ1YbKVLNbByFfAYZrWHGLSgArEM0X9GqnsNPQ10+C6xV/J3KM8BTTghfINmdX0Cp97JzzgGboFXg8RHwA1wlCr5TKZNfAER3NeWcGRWYAAAAABJRU5ErkJggg=="
               [hidden]="showDelete"

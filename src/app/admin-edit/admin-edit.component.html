@@ -1,0 +1,66 @@
+<section class="vh-100 bg-image" style="width: 1000px; height: 500px">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="card" style="border-radius: 15px">
+              <div class="card-body p-5">
+                <h2 class="text-uppercase text-center mb-5">Edit Item</h2>
+  
+                <form [formGroup]="editItem" (ngSubmit)="onSubmit()">
+                  <p>
+                    <input
+                      formControlName="description"
+                      id="description"
+                      placeholder="Description of item"
+                    />
+                  </p>
+                  <p>
+                    <input
+                    type="number"
+                      formControlName="cost"
+                      id="cost"
+                      placeholder="{{items?.cost}}"
+                    />
+                  </p>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Category</mat-label>
+                    <mat-select formControlName="category" id="role">
+                      <mat-option
+                        *ngFor="let select of selectList"
+                        [value]="select"
+                      >
+                        {{ select }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <p>
+                    <input
+                      formControlName="priceRating"
+                      id="priceRating"
+                      type="number"
+                      placeholder="{{items?.priceRating}}"
+                    />
+                  </p>
+                  <p>
+                    <input
+                      formControlName="sustainabilityRating"
+                      id="sustainabilityRating"
+                      type="number"
+                      placeholder="{{items?.sustainabilityRating}}"
+                    />
+                  </p>
+                  <p>
+                    <button class="btn btn-primary" type="submit">
+                     Edit Item
+                    </button>
+                  </p>
+                  <!-- <p><input formControlName="role" id="role" placeholder="user/admin" /></p> -->
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

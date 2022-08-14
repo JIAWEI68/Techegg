@@ -86,7 +86,7 @@ export class PaymentComponent implements OnInit {
   // }
   private initiConfig(): void {
     this.paypalsConfig = {
-      currency: 'USD',
+      currency: 'SGD',
       clientId: 'sb',
       createOrderOnClient: (data) =>
         <ICreateOrderRequest>{
@@ -94,11 +94,11 @@ export class PaymentComponent implements OnInit {
           purchase_units: [
             {
               amount: {
-                currency_code: 'USD',
+                currency_code: 'SGD',
                 value: this.finalSum.toString(),
                 breakdown: {
                   item_total: {
-                    currency_code: 'USD',
+                    currency_code: 'SGD',
                     value: this.finalSum.toString()
                   },
                 },
@@ -108,7 +108,7 @@ export class PaymentComponent implements OnInit {
                   name: "items",
                   quantity : '1',
                   unit_amount: {
-                    currency_code: 'USD',
+                    currency_code: 'SGD',
                     value: item.cost.toString()
                   },
                 };
@@ -122,7 +122,7 @@ export class PaymentComponent implements OnInit {
         style: {
           label: 'paypal',
           layout: 'vertical',
-          size: 'responsive',
+          size: 'responsive'
         },
         onApprove : (data, actions) => {
           console.log('onApprove - transaction was approved, but not authorized', data, actions);
@@ -142,6 +142,7 @@ export class PaymentComponent implements OnInit {
           console.log('OnError', err);
         },
         onClick : (data, actions) => {
+          
           console.log('onClick', data, actions);
         }
     };
