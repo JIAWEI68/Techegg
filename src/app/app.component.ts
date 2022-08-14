@@ -3,7 +3,7 @@ import { ItemsService } from './items.service';
 import { items } from './items';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -20,8 +20,14 @@ export class AppComponent implements OnInit {
   isLoggedIn!: Observable<boolean>;
   constructor(private authService: AuthService, private router: Router) {
     ItemsService.call;
+    this.router.events.subscribe((event) => {
+      if(event instanceof NavigationEnd) {
+        this.ngOnInit();
+      }
+    })
   }
   ngOnInit(): void {
+
     // this.isLoggedIn = this.authService.isLoggedInCheck;
     if (this.authService.isLoggedIn() == true) {
       this.showLogin = true;
