@@ -33,7 +33,7 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     if(this.authService.getUserRole() == 'Student'){
     this.itemsService.getAllItems().subscribe((data) => {
-      this.itemsDBList = data.filter((a) => a.cost <= 500);
+      this.itemsDBList = data.filter((a) => a.cost <= 4000);
       console.log(this.itemsDBList) 
     });}
     if(this.authService.getUserRole() == 'Teacher' || this.authService.getUserRole() == 'Admin' || this.authService.getUserRole() == 'Office Worker'){
@@ -79,7 +79,7 @@ export class UserComponent implements OnInit {
       (data) => {
         console.log(data);
         alert('Item Deleted');
-        this.route.navigateByUrl('/users');
+        this.route.navigateByUrl('/user');
       }
     );
   }

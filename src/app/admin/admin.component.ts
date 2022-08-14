@@ -56,7 +56,7 @@ export class AdminComponent implements OnInit {
       (data) => {
         console.log(data);
         alert('Item Added');
-        this.route.navigateByUrl('/users');
+        this.route.navigateByUrl('/user');
       }
     );
   }

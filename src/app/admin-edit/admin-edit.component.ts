@@ -61,6 +61,7 @@ export class AdminEditComponent implements OnInit {
       (data) => {
         console.log(data);
         alert('Item Edited');
+        this.route.navigateByUrl('/user');
       }
     );
   }

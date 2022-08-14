@@ -13,6 +13,7 @@
                       formControlName="description"
                       id="description"
                       placeholder="Description of item"
+                      [(ngModel)] = "items!.description"
                     />
                   </p>
                   <p>
@@ -20,12 +21,12 @@
                     type="number"
                       formControlName="cost"
                       id="cost"
-                      placeholder="{{items?.cost}}"
+                      [(ngModel)] = "items!.cost"
                     />
                   </p>
                   <mat-form-field appearance="fill">
                     <mat-label>Category</mat-label>
-                    <mat-select formControlName="category" id="role">
+                    <mat-select formControlName="category" id="category" [(ngModel)] = "items!.category">
                       <mat-option
                         *ngFor="let select of selectList"
                         [value]="select"
@@ -39,7 +40,7 @@
                       formControlName="priceRating"
                       id="priceRating"
                       type="number"
-                      placeholder="{{items?.priceRating}}"
+                      [(ngModel)] = "items!.priceRating"
                     />
                   </p>
                   <p>
@@ -47,7 +48,7 @@
                       formControlName="sustainabilityRating"
                       id="sustainabilityRating"
                       type="number"
-                      placeholder="{{items?.sustainabilityRating}}"
+                        [(ngModel)] = "items!.sustainabilityRating"
                     />
                   </p>
                   <p>
