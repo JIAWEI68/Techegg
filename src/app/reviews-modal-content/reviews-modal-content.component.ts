@@ -27,6 +27,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
   newReviews!: reviews;
   itemsName!: string;
   reviews = this.reviewsDBList;
+  username :string = '';
   _id :string = '0';
   i : number = 0;
   private sub: any;
@@ -54,7 +55,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
     });
     this.updateForm = this.fb.group({
       id: '',
-      username: '',
+      username: this.authService.getSecureToken(),
       description: '',
       itemsId: this.id,
     });
@@ -76,7 +77,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
   }
   onSubmit(items: items, formDirective: FormGroupDirective) {
     this.newReviews = new reviews();
-    this.newReviews.username = this.myForm.value.username;
+    this.newReviews.username = this.authService.getSecureToken()!.toString();
     this.newReviews.description = this.myForm.value.description;
     this.newReviews.itemsId = this.items._id;
     this.reviewsService.addReviewsDB(this.newReviews).subscribe((data) => {
@@ -88,14 +89,18 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
     console.log(this.newReviews);
     console.log(this.reviewsList);
   }
-  edit(content: any, _id : string) {
-    
+  edit(content: any, _id : string, username: string) {
     // console.log(this.newReviews.id);
-   if (this.authService.isLoggedIn()) {
+   if (this.authService.isLoggedIn() && username == this.authService.getSecureToken()) {
       this.modalService.open(content);
       this.myForm.reset;
     this._id = _id;
-    } else {
+    this.username = username;
+    }
+    else if(username != this.authService.getSecureToken()){
+      alert('You can only edit your own reviews');
+    } 
+    else {
       alert('You must be logged in to edit a review');
     }
   }
@@ -112,11 +117,16 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
       }
     });
   }
-  delete(id: string) {
+  delete(id: string, username : string) {
+  if(username === this.authService.getSecureToken()){
     this.reviewsService.deleteReviewsDB(id).subscribe((data) => {
       this.reviewsDBList.splice(this.reviewsDBList.indexOf(data), 1);
       location.reload();
     });
+  }
+  else{
+    alert('You can only delete your own reviews');
+  }
   }
   onUpdate(_id: string) {
     var description = (
