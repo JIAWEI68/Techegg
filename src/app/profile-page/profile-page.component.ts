@@ -13,33 +13,51 @@ export class ProfilePageComponent implements OnInit {
   userList: user[] = [];
   userFilteredList: any[] = [];
   stringArray: user[] = [];
-  username: string = '';
   userNameList: string[] = [];
+  username: string = '';
+  firstName : string = '';
+  lastName : string = '';
+  email : string = '';
   editProfile!: FormGroup;
-  constructor(private authService: AuthService, private fb: FormBuilder, private router : Router) {}
+  imageUrl : string = "";
+  constructor(private authService: AuthService, private fb: FormBuilder, private router : Router) {
+  }
 
   ngOnInit(): void {
     this.authService.getAllUsers().subscribe((data) => {
       this.userList = data.filter(
         (x) => x.username == this.authService.getSecureToken()
       );
+      this.editProfile = this.fb.group({
+        name: this.authService.getSecureToken(),
+        email : this.email,
+        firstName : this.firstName,
+        lastName : this.lastName,
+        imageUrl : "",
+        role: this.authService.getUserRole(),
+      });
       this.stringArray.push(this.userList[0]);
       console.log(this.userList);
       this.username = this.stringArray[0].username;
+      this.firstName = this.stringArray[0].firstName;
+      this.lastName = this.stringArray[0].lastName;
+      this.email = this.stringArray[0].email;
+      this.imageUrl = this.stringArray[0].imageUrl;
       this.userNameList.push(this.username);
-      console.log(this.username);
-      console.log(this.userNameList);
-      console.log(this.userNameList.indexOf("as"));
-      console.log(this.userNameList?.[0])
       console.log(this.stringArray);
+      console.log(this.imageUrl)
+      console.log(this)
     });
-    this.editProfile = this.fb.group({
-      name: this.authService.getSecureToken(),
-      role: this.authService.getUserRole(),
-    });
+    if(this.imageUrl == ""){
+      this.imageUrl = "https://img.icons8.com/small/60/undefined/user-male-circle.png"
+    }
+    else{
+      this.imageUrl = this.stringArray?.[0]?.imageUrl
+    }
+    this.username = this.userNameList?.[0]
   }
   updateProfile(_id : string){
-    this.authService.updateUser(_id, this.editProfile.value.name).subscribe(
+    this.authService.updateUser(_id, this.editProfile.value.firstName, this.editProfile.value.lastName, this.editProfile.value.email, this.editProfile.value.imageUrl).subscribe(
       (data) => {
         console.log(data);
         location.reload();

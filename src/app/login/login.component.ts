@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginFormGroup = this.fb.group({
-      username: '',
-      password: '',
+      username: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
   onSubmit() {
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.authService.setUserRole(this.results[0].role);
     this.router.navigateByUrl('/user');
     } else{
-    console.log("Wrong username or password")
+    alert('Invalid Credentials');
     }
     });
     }

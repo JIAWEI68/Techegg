@@ -114,6 +114,7 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
   delete(id: string) {
     this.reviewsService.deleteReviewsDB(id).subscribe((data) => {
       this.reviewsDBList.splice(this.reviewsDBList.indexOf(data), 1);
+      location.reload();
     });
   }
   onUpdate(_id: string) {
@@ -121,7 +122,8 @@ export class ReviewsModalContentComponent implements AfterViewChecked, OnInit {
       document.getElementById(_id + '_description') as HTMLInputElement
     ).value;
     this.reviewsService.updateReviewsDB(_id, description).subscribe((data) => {
-      this.reviewsDBList[this.reviewsList.indexOf(data)] = data;
+      this.reviewsDBList[this.reviewsDBList.indexOf(data)] = data;
+      location.reload();
     });
   }
 }

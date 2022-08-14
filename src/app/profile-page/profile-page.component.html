@@ -3,8 +3,8 @@
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-8 col-xl-6">
         <div class="card rounded-3">
-          <div class="card-body p-4 p-md-5">
-            <div
+          <div class="card-body p-4 p-md-5" *ngFor="let users of stringArray">
+            <div 
               class="container"
               style="
                 position: absolute;
@@ -15,7 +15,6 @@
               "
             >
               <div
-                *ngFor="let users of stringArray"
                 class="shoppingCart"
                 style="position: 0; right: 0; margin-right: 0px"
               >
@@ -32,30 +31,25 @@
               style="text-align: center"
             >
               <img
-                src="https://img.icons8.com/small/60/undefined/user-male-circle.png"
-              /><br /><button
-                type="submit"
-                class="btn btn-success btn-lg mb-1"
-                style="height: 40px; text-align: center"
-              >
-                Change Image
-              </button>
+                src="{{imageUrl}}"
+              />
+              <p>Username : {{ username }}</p>
             </h3>
-
             <form
               class="px-md-2"
               [formGroup]="editProfile"
-              *ngFor="let user of stringArray"
-              (ngSubmit)="updateProfile(user._id)"
+              (ngSubmit)="updateProfile(users._id)"
             >
               <p>
                 <input
-                  formControlName="name"
-                  id="username"
-                  placeholder="Your name"
+                  formControlName="firstName"
+                  id="firstName"
+                  placeholder="{{ users.firstName }}"
                 />
               </p>
-              <!-- <p><input formControlName="imageUrl" id="password" placeholder="Your password" /></p> -->
+              <p><input formControlName = "lastName" id = "lastName" placeholder="{{users.lastName}}"></p>
+              <p><input formControlName = "email" id = "email" placeholder="{{users.email}}"></p>
+              <p><input formControlName="imageUrl" id="image" placeholder="Your image link" /></p>
               <p>
                 <input
                   formControlName="role"
@@ -66,40 +60,6 @@
               <p>
                 <button class="btn btn-primary" type="submit">Update</button>
               </p>
-              <!-- <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example1q">Username</label>
-                <input type="text" id="form3Example1q" class="form-control" />
-              </div>
-              <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example1q">Password</label>
-                <input type="text" id="form3Example1q" class="form-control" />
-              </div>
-              <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example1q"
-                  >First Name</label
-                >
-                <input type="text" id="form3Example1q" class="form-control" />
-              </div>
-              <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example1q">Last Name</label>
-                <input type="text" id="form3Example1q" class="form-control" />
-              </div>
-              <div class="form-outline mb-4">
-                <label class="form-label" for="form3Example1q">Email</label>
-                <input type="text" id="form3Example1q" class="form-control" />
-              </div>
-              <div class="mb-4 pb-2">
-                <p>Profession</p>
-                <select class="select" style="width: 250px">
-                  <option value="1"></option>
-                  <option value="2">Student</option>
-                  <option value="3">Teacher</option>
-                  <option value="4">Office Worker</option>
-                </select>
-              </div>
-              <button type="submit" class="btn btn-success btn-lg mb-1">
-               Update
-              </button> -->
             </form>
           </div>
         </div>

@@ -6,6 +6,31 @@
           <div class="card-body p-4 p-md-5">
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Login</h3>
             <form [formGroup]="loginFormGroup" novalidate (ngSubmit)="onSubmit()">
+              <div class="container">
+                <div class="row">
+                  <div
+                    *ngIf="loginFormGroup.invalid"
+                    class="col-sm-6 col-sm-offset-3"
+                  >
+                    <p
+                      *ngIf="
+                        loginFormGroup.controls.username.dirty &&
+                        loginFormGroup.controls.username.hasError('required')
+                      "
+                    >
+                      * Username is required
+                    </p>
+                    <p
+                      *ngIf="
+                        loginFormGroup.controls.password.dirty &&
+                        loginFormGroup.controls.password.hasError('required')
+                      "
+                    >
+                      * Password is required
+                    </p>
+                    </div>
+                    </div>
+                    </div>
               <p><input formControlName="username" id="username" placeholder="Your username"/></p>
               <p><input formControlName="password" id="password" placeholder="Your password" /></p>
               <p><button class="btn btn-primary" type="submit" >Login</button></p>

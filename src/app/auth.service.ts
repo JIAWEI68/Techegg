@@ -63,9 +63,8 @@ export class AuthService {
   getAllUsers(){
     return this.http.get<user[]>(this.userUrl, {'responseType' : 'json'});
   }
-  updateUser(_id : string, username : string){
-    sessionStorage.setItem('Username', username);
-    return this.http.put<user>(this.userUrl + '/' + _id, {username : username});
+  updateUser(_id : string, firstName : string, lastName : string, email : string, imageUrl : string){
+    return this.http.put<user>(this.userUrl + '/' + _id, {firstName : firstName, lastName : lastName, email : email, imageUrl : imageUrl});
   }
   deleteUser(_id:string){
     sessionStorage.removeItem('Username');
